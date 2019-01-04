@@ -1,0 +1,13 @@
+/vendor/
+storage/logs
+.*/
+*.log
+*.gz
+*.lock
+*.bak
+*.DS_Store
+*.tags
+*.tags_sorted_by_file
+.phpstorm.meta.php
+.php_cs.cache
+package-lock.json
