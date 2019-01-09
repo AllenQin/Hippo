@@ -38,6 +38,6 @@ class Bootstrap extends Bootstrap_Abstract
 
     public function _initView(Dispatcher $dispatcher)
     {
-        $dispatcher->autoRender(false);
+        // $dispatcher->autoRender(false);
     }
 }
