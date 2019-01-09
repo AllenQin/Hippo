@@ -23,7 +23,8 @@
             "App\\Services\\": "application/services",
             "App\\Helpers\\": "application/helpers",
             "App\\Defines\\": "application/defines",
-            "App\\Library\\": "application/library"
+            "App\\Library\\Core\\": "application/library/Core",
+            "App\\Library\\Utility\\": "application/library/Utility"
         }
     },
     "repositories": {
