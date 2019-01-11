@@ -1,5 +1,6 @@
 <?php
 
+use App\Library\Core\Di\Container;
 use Yaf\Application;
 use Yaf\Bootstrap_Abstract;
 use Yaf\Dispatcher;
@@ -26,6 +27,10 @@ class Bootstrap extends Bootstrap_Abstract
 
     public function _initServices()
     {
+        $DIFilePath = APP_PATH . '/conf/di.php';
+        if (file_exists($DIFilePath) && $DIServices = require($DIFilePath)) {
+            Registry::set('di', new Container($DIServices));
+        }
     }
 
     public function _initListener()

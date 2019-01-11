@@ -1,7 +1,7 @@
 <?php
 namespace App\Library\Core\Di;
 
-use Core\Di\ContainerInterface;
+use App\Library\Core\Di\ContainerInterface;
 use Pimple\Container as PimpleContainer;
 use Yaf\Exception;
 

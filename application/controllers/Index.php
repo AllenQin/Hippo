@@ -1,9 +1,10 @@
 <?php
-use Yaf\Controller_Abstract;
-class IndexController extends Controller_Abstract
+
+use App\Library\Core\Controller;
+
+class IndexController extends Controller
 {
     public function indexAction()
     {
-        $this->getView()->content = "Hello World";
     }
 }

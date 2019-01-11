@@ -1,5 +1,5 @@
 <?php
-App\Library\Core\Di;
+namespace App\Library\Core\Di;
 
 Interface ContainerInterface
 {
