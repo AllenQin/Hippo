@@ -13,7 +13,8 @@
         "league/csv": "^8.1",
         "tightenco/collect": "^5.3",
         "illuminate/support": "^5.7",
-        "guzzlehttp/guzzle": "~6.0"
+        "guzzlehttp/guzzle": "~6.0",
+        "symfony/event-dispatcher": "^4.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.4",
@@ -26,7 +27,7 @@
             "App\\Helpers\\": "application/helpers",
             "App\\Defines\\": "application/defines",
             "App\\Library\\Core\\": "application/library/Core",
-            "App\\Library\\Utility\\": "application/library/Utility"
+            "App\\Models\\" : "application/models"
         }
     },
     "repositories": {

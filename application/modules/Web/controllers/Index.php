@@ -1,7 +1,10 @@
 <?php
 
 use App\Library\Core\Controller;
+use App\Services\Event\OrderPlacedEvent;
 use GuzzleHttp\Client;
+use Goods\OrderModel;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class IndexController extends Controller
 {
@@ -10,6 +13,13 @@ class IndexController extends Controller
         /* @var $client Client */
         $client = $this->di->get('httpClient');
 
-        $this->display('index', ['content' => 'Hello World']);
+        $order = new OrderModel(1000);
+        $event = new OrderPlacedEvent($order);
+
+        /* @var EventDispatcher $eventDispatcher */
+        $eventDispatcher = $this->di->get('eventDispatcher');
+        $eventDispatcher->dispatch(OrderPlacedEvent::NAME, $event);
+
+        $this->display('index', ['content' => '']);
     }
 }

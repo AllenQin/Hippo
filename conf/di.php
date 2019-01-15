@@ -1,5 +1,6 @@
 <?php
 use GuzzleHttp\Client;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 return [
     'db' => function($c) {
@@ -14,8 +15,8 @@ return [
     'queue' => function($c) {
         // @todo use queue class
     },
-    'eventManage' => function($c) {
-        // @todo use event manage
+    'eventDispatcher' => function($c) {
+        return new EventDispatcher();
     },
     'assert' => function($c) {
         // @todo use validators

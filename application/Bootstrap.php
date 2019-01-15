@@ -1,6 +1,7 @@
 <?php
 
 use App\Library\Core\Di\Container;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Yaf\Application;
 use Yaf\Bootstrap_Abstract;
 use Yaf\Dispatcher;
@@ -35,6 +36,16 @@ class Bootstrap extends Bootstrap_Abstract
 
     public function _initListener()
     {
+        $listenerFilePath = APP_PATH . '/conf/listener.php';
+        if (file_exists($listenerFilePath) && $listener = require($listenerFilePath)) {
+            /* @var EventDispatcher $eventDispatcher */
+            $eventDispatcher = Registry::get('di')->get('eventDispatcher');
+            foreach ($listener as $eventName => $value) {
+                foreach ($value as $listen) {
+                    $eventDispatcher->addListener($eventName, $listen);
+                }
+            }
+        }
     }
 
     public function _initPlugin(Dispatcher $dispatcher)

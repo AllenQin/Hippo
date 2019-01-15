@@ -13,6 +13,5 @@ class Controller extends Controller_Abstract implements InjectionWareInterface
 
     public function init()
     {
-        // @todo catch Error
     }
 }
