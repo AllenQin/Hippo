@@ -7,9 +7,13 @@ use Yaf\Bootstrap_Abstract;
 use Yaf\Dispatcher;
 use Yaf\Loader;
 use Yaf\Registry;
+use Yaf\Route\Rewrite;
 
 class Bootstrap extends Bootstrap_Abstract
 {
+    /**
+     * 加载配置文件
+     */
     public function _initConfig()
     {
         // 初始化化配置
@@ -17,6 +21,9 @@ class Bootstrap extends Bootstrap_Abstract
         Registry::set('config', $config);
     }
 
+    /**
+     * 引入自动加载文件
+     */
     public function _initLoader()
     {
         $loader = Loader::getInstance();
@@ -26,14 +33,19 @@ class Bootstrap extends Bootstrap_Abstract
         }
     }
 
+    /**
+     * 加载预注入容器的服务
+     */
     public function _initServices()
     {
-        $DIFilePath = APP_PATH . '/conf/di.php';
-        if (file_exists($DIFilePath) && $DIServices = require($DIFilePath)) {
-            Registry::set('di', new Container($DIServices));
+        if (file_exists(APP_PATH . '/conf/di.php') && $services = require(APP_PATH . '/conf/di.php')) {
+            Registry::set('di', new Container($services));
         }
     }
 
+    /**
+     * 加载监听事件
+     */
     public function _initListener()
     {
         $listenerFilePath = APP_PATH . '/conf/listener.php';
@@ -41,19 +53,47 @@ class Bootstrap extends Bootstrap_Abstract
             /* @var EventDispatcher $eventDispatcher */
             $eventDispatcher = Registry::get('di')->get('eventDispatcher');
             foreach ($listener as $eventName => $value) {
-                foreach ($value as $listen) {
-                    $eventDispatcher->addListener($eventName, $listen);
+                if (is_array($value)) {
+                    foreach ($value as $listen) {
+                        $eventDispatcher->addListener($eventName, $listen);
+                    }
+                } else {
+                    $eventDispatcher->addListener($eventName, $value);
                 }
             }
         }
     }
 
-    public function _initPlugin(Dispatcher $dispatcher)
+    /**
+     * 加载自定义路由
+     *
+     * @param Dispatcher $dispatcher
+     */
+    public function _initRouter(Dispatcher $dispatcher)
     {
+        if (file_exists(APP_PATH . '/conf/router.php') && $routerContent = require(APP_PATH . '/conf/router.php')) {
+            $router = $dispatcher->getRouter();
+            $router->addConfig($routerContent);
+        }
     }
 
+    /**
+     * 加载自定义插件
+     *
+     * @param Dispatcher $dispatcher
+     */
+    public function _initPlugin(Dispatcher $dispatcher)
+    {
+
+    }
+
+    /**
+     * 处理视图展示
+     *
+     * @param Dispatcher $dispatcher
+     */
     public function _initView(Dispatcher $dispatcher)
     {
-        // $dispatcher->autoRender(false);
+        $dispatcher->autoRender(false);
     }
 }

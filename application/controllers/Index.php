@@ -1,6 +1,6 @@
 <?php
 
-use App\Library\Core\Controller;
+use App\Library\Core\MVC\Controller;
 
 class IndexController extends Controller
 {

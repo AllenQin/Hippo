@@ -1,8 +1,12 @@
 <?php
 use GuzzleHttp\Client;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Yaf\Registry;
 
 return [
+    'config' => function($c) {
+        return Registry::get('config');
+    },
     'db' => function($c) {
         // @todo use db class
     },
