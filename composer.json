@@ -15,7 +15,8 @@
         "illuminate/support": "^5.7",
         "guzzlehttp/guzzle": "~6.0",
         "symfony/event-dispatcher": "^4.2",
-        "catfan/medoo": "^1.6"
+        "catfan/medoo": "^1.6",
+        "chrisboulton/php-resque": "^1.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.4",
