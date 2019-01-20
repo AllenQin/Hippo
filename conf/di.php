@@ -1,4 +1,5 @@
 <?php
+use App\Library\Core\Database\MySQL;
 use GuzzleHttp\Client;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -10,7 +11,7 @@ return [
         return Registry::get('config');
     },
     'db' => function($c) {
-        // @todo use db class
+        return new MySQL($c['config']['database']);
     },
     'cache' => function($c) {
         // @todo use memcache
