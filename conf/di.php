@@ -1,4 +1,5 @@
 <?php
+use App\Library\Core\Cache\Redis;
 use App\Library\Core\Database\MySQL;
 use GuzzleHttp\Client;
 use Monolog\Handler\StreamHandler;
@@ -14,10 +15,7 @@ return [
         return new MySQL($c['config']['database']);
     },
     'cache' => function($c) {
-        // @todo use memcache
-    },
-    'redis' => function($c) {
-        // @todo use redis cache
+        return new Redis($c['config']['redis']);
     },
     'queue' => function($c) {
         // @todo use queue class
