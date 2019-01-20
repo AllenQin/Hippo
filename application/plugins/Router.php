@@ -19,6 +19,7 @@ class RouterPlugin extends Plugin_Abstract
             'module' => $request->getModuleName(),
             'controller' => $request->getControllerName(),
             'action' => $request->getActionName(),
+            'time' => microtime(),
         ]);
     }
 }
