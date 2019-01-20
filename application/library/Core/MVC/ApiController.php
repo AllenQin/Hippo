@@ -2,22 +2,15 @@
 namespace App\Library\Core\MVC;
 
 use App\Defines\OuterCode;
-use App\Library\Core\Di\InjectionWareInterface;
-use App\Library\Core\Di\InjectionWareTrait;
-use Yaf\Controller_Abstract;
 use Yaf\Exception\LoadFailed\Action;
 
-class ApiController extends Controller_Abstract implements InjectionWareInterface
+class ApiController extends BaseController
 {
-    use InjectionWareTrait;
     use ApiTrait;
-
-    public $yafAutoRender = false;
 
     public function init()
     {
         header('Content-type:text/json');
-
         set_exception_handler([$this, 'catchException']);
     }
 

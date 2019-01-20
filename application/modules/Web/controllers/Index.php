@@ -9,7 +9,8 @@ class IndexController extends Controller
 {
     public function indexAction()
     {
-        $order = new OrderModel(1000);
+        $orderId = $this->getQuery('order_id', 1024);
+        $order = new OrderModel($orderId);
         $event = new OrderPlacedEvent($order);
 
         /* @var EventDispatcher $eventDispatcher */
@@ -17,11 +18,5 @@ class IndexController extends Controller
         $eventDispatcher->dispatch(OrderPlacedEvent::NAME, $event);
 
         $this->display('index', ['content' => '']);
-    }
-
-    public function sayHelloAction()
-    {
-        echo 'hello';
-        die();
     }
 }

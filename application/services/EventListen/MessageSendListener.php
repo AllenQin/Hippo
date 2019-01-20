@@ -1,16 +1,16 @@
 <?php
 namespace App\Services\EventListen;
 
+use App\Services\Event\OrderPlacedEvent;
 use Goods\OrderModel;
-use Symfony\Component\EventDispatcher\Event;
 
 class MessageSendListener
 {
-    public function onOrderPlaced(Event $event)
+    public function onOrderPlaced(OrderPlacedEvent $event)
     {
         /* @var OrderModel $order */
         $order = $event->getOrder();
 
-        echo '通知订单:' . $order->getOrderId() . PHP_EOL;
+        echo 'the order number : ' . $order->getOrderId() . PHP_EOL;
     }
 }

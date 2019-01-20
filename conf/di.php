@@ -1,5 +1,7 @@
 <?php
 use GuzzleHttp\Client;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Yaf\Registry;
 
@@ -26,10 +28,12 @@ return [
         // @todo use validators
     },
     'httpClient' => function($c) {
-        // @todo use http client class
         return new Client();
     },
-    'log' => function($c) {
-        // @todo use log class
+    'logger' => function($c) {
+        $Log = new Logger($c['config']['log']['channel']);
+        $Log->pushHandler(new StreamHandler($c['config']['log']['path'] . '/'
+            . date($c['config']['log']['file_format']) . '.log', Logger::DEBUG));
+        return $Log;
     }
 ];
