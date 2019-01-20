@@ -84,7 +84,13 @@ class Bootstrap extends Bootstrap_Abstract
      */
     public function _initPlugin(Dispatcher $dispatcher)
     {
+        $plugins = [
+            new RouterPlugin(),
+        ];
 
+        foreach ($plugins as $plugin) {
+            $dispatcher->registerPlugin($plugin);
+        }
     }
 
     /**
