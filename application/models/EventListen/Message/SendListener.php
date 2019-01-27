@@ -20,7 +20,12 @@ class SendListener extends Listener
 
         /* @var HQueue $queue */
         $queue = $this->di->get('queue');
-        $jobId = $queue->enqueue('order', MessageJob::class, ['userPhone' => '13000000000']);
+
+        $msgBody = [
+            'phone' => '13000000000',
+            'content' => '订单已发货',
+        ];
+        $jobId = $queue->enqueue('order', MessageJob::class, $msgBody);
         if (!$jobId) {
             // 补发消息
         }
