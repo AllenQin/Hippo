@@ -5,7 +5,7 @@ use App\Library\Core\MVC\Controller;
 use App\Library\Core\Queue\HQueue;
 use App\Models\Event\OrderPlacedEvent;
 use App\Models\Jobs\OrderJob;
-use App\Models\Goods\OrderModel;
+use Goods\OrderModel;
 
 class IndexController extends Controller
 {

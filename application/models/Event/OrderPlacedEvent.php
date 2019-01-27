@@ -2,7 +2,7 @@
 namespace App\Models\Event;
 
 use App\Library\Core\Event\IEvent;
-use App\Models\Goods\OrderModel;
+use Goods\OrderModel;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
