@@ -10,12 +10,14 @@ class Controller extends BaseController
         set_exception_handler([$this, 'catchException']);
     }
 
-    public function catchException(\Exception $e)
+    public function catchException($e)
     {
-        if ($e instanceof Action) {
-            return false;
+        if ($e instanceof \Exception || $e instanceof \Error) {
+            print_r($e);
         } else {
-            return false;
+            // @todo log
         }
+
+        die();
     }
 }

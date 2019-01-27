@@ -1,11 +1,25 @@
 <?php
 namespace App\Library\Core\Database;
 
+use App\Library\Core\Di\InjectionWareInterface;
+use App\Library\Core\Di\InjectionWareTrait;
 use Medoo\Medoo;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class MySQL implements DatabaseInterface
+/**
+ * Class MySQL
+ *
+ * @property EventDispatcher $eventManager
+ *
+ * @package App\Library\Core\Database
+ */
+class MySQL implements DatabaseInterface, InjectionWareInterface
 {
+    use InjectionWareTrait;
+
     private $dbInstance;
+
+    private $eventManager;
 
     public function __construct($config)
     {
@@ -19,11 +33,14 @@ class MySQL implements DatabaseInterface
             'port' => $config['port'],
             'prefix' => $config['prefix'] ?: '',
         ]);
+
+        $this->eventManager = $this->getDi()->get('eventDispatcher');
     }
 
     public function find($table, $column, $where = [])
     {
-        return $this->dbInstance->get($table, $column, $where);
+        $result = $this->dbInstance->get($table, $column, $where);
+        return $result;
     }
 
     public function findAll($table, $column, $where = [])

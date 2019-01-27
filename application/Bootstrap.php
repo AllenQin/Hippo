@@ -85,7 +85,7 @@ class Bootstrap extends Bootstrap_Abstract
     public function _initPlugin(Dispatcher $dispatcher)
     {
         $plugins = [
-            new RouterPlugin(),
+            new RequestPlugin(),
         ];
 
         foreach ($plugins as $plugin) {

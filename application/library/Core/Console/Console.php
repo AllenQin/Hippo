@@ -22,8 +22,9 @@ class Console extends BaseController
         return $msg;
     }
 
-    public function catchException(\Exception $e)
+    public function catchException($e)
     {
+        print_r($e);
         if ($e instanceof Action) {
             echo $this->colorize('not find action', 'FAILURE') . PHP_EOL;
         } else {

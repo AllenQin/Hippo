@@ -1,6 +1,7 @@
 <?php
 use App\Library\Core\Cache\Redis;
 use App\Library\Core\Database\MySQL;
+use App\Library\Core\Queue\HQueue;
 use GuzzleHttp\Client;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -12,13 +13,15 @@ return [
         return Registry::get('config');
     },
     'db' => function($c) {
-        return new MySQL($c['config']['database']);
+        $db = new MySQL($c['config']['database']);
+        return $db;
     },
     'cache' => function($c) {
         return new Redis($c['config']['redis']);
     },
     'queue' => function($c) {
-        // @todo use queue class
+        $queue = new HQueue($c['config']['queue']);
+        return $queue;
     },
     'eventDispatcher' => function($c) {
         return new EventDispatcher();
