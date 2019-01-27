@@ -1,5 +1,5 @@
 <?php
-namespace App\Models\EventListen;
+namespace App\Models\EventListen\Message;
 
 use App\Library\Core\Event\Listener;
 use App\Models\Jobs\MessageJob;
@@ -7,7 +7,7 @@ use Goods\OrderModel;
 use Monolog\Logger;
 use Symfony\Component\EventDispatcher\Event;
 
-class MessageSendListener extends Listener
+class SendListener extends Listener
 {
     public function onOrderPlaced(Event $event)
     {

@@ -5,7 +5,7 @@ use App\Library\Core\MVC\Controller;
 use App\Library\Core\Queue\HQueue;
 use App\Models\Event\OrderPlacedEvent;
 use App\Models\Jobs\OrderJob;
-use Goods\OrderModel;
+use App\Models\Goods\OrderModel;
 
 class IndexController extends Controller
 {
@@ -14,10 +14,9 @@ class IndexController extends Controller
         // Event Demo
         $orderId = $this->getQuery('order_id', 1024);
         $order = new OrderModel($orderId);
-        $event = new OrderPlacedEvent($order);
 
         $eventDispatcher = $this->di->get('eventDispatcher');
-        $eventDispatcher->dispatch(OrderPlacedEvent::NAME, $event);
+        $eventDispatcher->dispatch(OrderPlacedEvent::NAME, new OrderPlacedEvent($order));
 
         /* @var DatabaseInterface $db */
         // Database Demo

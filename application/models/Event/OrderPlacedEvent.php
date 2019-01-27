@@ -2,9 +2,15 @@
 namespace App\Models\Event;
 
 use App\Library\Core\Event\IEvent;
-use Goods\OrderModel;
+use App\Models\Goods\OrderModel;
 use Symfony\Component\EventDispatcher\Event;
 
+/**
+ * 订单发货事件
+ *
+ * Class OrderPlacedEvent
+ * @package App\Models\Event
+ */
 class OrderPlacedEvent extends Event implements IEvent
 {
     const NAME = 'order.placed';

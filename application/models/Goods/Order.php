@@ -1,5 +1,5 @@
 <?php
-namespace Goods;
+namespace App\Models\Goods;
 
 class OrderModel
 {

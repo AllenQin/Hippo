@@ -1,6 +1,6 @@
 <?php
 use App\Models\EventListen\Goods\StockListener;
-use App\Models\EventListen\MessageSendListener;
+use App\Models\EventListen\Message\SendListener;
 use Symfony\Component\EventDispatcher\Event;
 
 return [
@@ -9,7 +9,7 @@ return [
             return (new StockListener())->onOrderPlaced($event);
         },
         function(Event $event) {
-            return (new MessageSendListener())->onOrderPlaced($event);
+            return (new SendListener())->onOrderPlaced($event);
         },
         // ...
     ],
