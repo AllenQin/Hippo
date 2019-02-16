@@ -6,6 +6,7 @@ use App\Models\Jobs\MessageJob;
 use Goods\OrderModel;
 use Monolog\Logger;
 use Symfony\Component\EventDispatcher\Event;
+use App\Library\Core\Queue\HQueue;
 
 class SendListener extends Listener
 {

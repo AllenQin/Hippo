@@ -1,6 +1,5 @@
 <?php
 
-// @todo 通过用户访问设置自定义模块名称
 $defaultModule = 'Web';
 $defaultController = 'Index';
 $defaultAction = 'Index';

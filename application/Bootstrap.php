@@ -2,12 +2,13 @@
 
 use App\Library\Core\Di\Container;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Whoops\Handler\PrettyPageHandler;
+use Whoops\Run;
 use Yaf\Application;
 use Yaf\Bootstrap_Abstract;
 use Yaf\Dispatcher;
 use Yaf\Loader;
 use Yaf\Registry;
-use Yaf\Route\Rewrite;
 
 class Bootstrap extends Bootstrap_Abstract
 {
@@ -30,6 +31,16 @@ class Bootstrap extends Bootstrap_Abstract
         $autoload = APP_PATH . '/vendor/autoload.php';
         if (file_exists($autoload)) {
             $loader->import($autoload);
+        }
+    }
+
+    /**
+     * 开发环境开启调试错误处理
+     */
+    public function _initDebugConfig()
+    {
+        if (Application::app()->environ() == 'develop') {
+            (new Run())->pushHandler(new PrettyPageHandler())->register();
         }
     }
 

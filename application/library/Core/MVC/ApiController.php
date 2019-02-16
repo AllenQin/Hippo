@@ -2,6 +2,7 @@
 namespace App\Library\Core\MVC;
 
 use App\Defines\OuterCode;
+use Yaf\Application;
 use Yaf\Exception\LoadFailed\Action;
 
 class ApiController extends BaseController
@@ -10,8 +11,10 @@ class ApiController extends BaseController
 
     public function init()
     {
-        header('Content-type:text/json');
-        set_exception_handler([$this, 'catchException']);
+        if (Application::app()->environ() != 'develop') {
+            header('Content-type:text/json');
+            set_exception_handler([$this, 'catchException']);
+        }
     }
 
     public function catchException(\Exception $e)
