@@ -13,7 +13,6 @@ class IndexController extends ApiController
         if ($value === false) {
             $cache->set('name', 'allen', 60);
         }
-
         return $this->success(['content' => $value]);
     }
 }
