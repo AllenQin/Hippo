@@ -1,6 +1,7 @@
 <?php
 
 use App\Library\Core\Di\Container;
+use Illuminate\Database\Capsule\Manager;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
@@ -12,14 +13,16 @@ use Yaf\Registry;
 
 class Bootstrap extends Bootstrap_Abstract
 {
+    private $config;
+
     /**
      * 加载配置文件
      */
     public function _initConfig()
     {
         // 初始化化配置
-        $config = Application::app()->getConfig()->toArray();
-        Registry::set('config', $config);
+        $this->config = Application::app()->getConfig()->toArray();
+        Registry::set('config', $this->config);
     }
 
     /**
@@ -37,11 +40,22 @@ class Bootstrap extends Bootstrap_Abstract
     /**
      * 开发环境开启调试错误处理
      */
-    public function _initDebugConfig()
+    public function _initDebug()
     {
-        if (Application::app()->environ() == 'develop') {
+        if ($this->config['application']['debug'] == true) {
             (new Run())->pushHandler(new PrettyPageHandler())->register();
         }
+    }
+
+    public function _initDefaultDbAdapter()
+    {
+        $capsule = new Manager();
+        $capsule->addConnection($this->config['database']);
+        $capsule->setEventDispatcher(new \Illuminate\Events\Dispatcher(new Illuminate\Container\Container()));
+        $capsule->setAsGlobal();
+
+        $capsule->bootEloquent();
+        class_alias('\Illuminate\Database\Capsule\Manager', 'DB');
     }
 
     /**

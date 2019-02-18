@@ -12,10 +12,6 @@ return [
     'config' => function($c) {
         return Registry::get('config');
     },
-    'db' => function($c) {
-        $db = new MySQL($c['config']['database']);
-        return $db;
-    },
     'cache' => function($c) {
         return new Redis($c['config']['redis']);
     },
