@@ -6,32 +6,23 @@ use App\Library\Core\Queue\HQueue;
 use App\Models\Event\OrderPlacedEvent;
 use App\Models\Jobs\OrderJob;
 use Goods\OrderModel;
+use Illuminate\Support\Collection;
 use User\UserModel;
 
 class IndexController extends Controller
 {
     public function indexAction()
     {
-        // Event Demo
-        /*
-        $orderId = $this->getQuery('order_id', 1024);
-        $order = new OrderModel($orderId);
+        $users = UserModel::all();
+        $showUsers = $users->transform(function($user){
+            return ['name' => $user->user_name, 'age' => $user->age + 1, 'id' => $user->id];
+        });
 
-        $eventDispatcher = $this->di->get('eventDispatcher');
-        $eventDispatcher->dispatch(OrderPlacedEvent::NAME, new OrderPlacedEvent($order));
-        */
-
-        // Database Demo
-        $user = UserModel::where('age', '>', 18)->first();
-        echo $user->age . PHP_EOL;
-
-        $user->age = 33;
-        $user->save();
-
-        /*
-        $queue = $this->di->get('queue');
-        $jobId = $queue->enqueue('order', OrderJob::class, ['order_id' => $orderId]);
-        */
+        foreach ($showUsers->toArray() as $item) {
+            $order = new OrderModel($item['id']);
+            $eventDispatcher = $this->di->get('eventDispatcher');
+            $eventDispatcher->dispatch(OrderPlacedEvent::NAME, new OrderPlacedEvent($order));
+        }
 
         $this->display('index', ['content' => 'Hippo!']);
     }

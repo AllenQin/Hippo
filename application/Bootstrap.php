@@ -47,17 +47,6 @@ class Bootstrap extends Bootstrap_Abstract
         }
     }
 
-    public function _initDefaultDbAdapter()
-    {
-        $capsule = new Manager();
-        $capsule->addConnection($this->config['database']);
-        $capsule->setEventDispatcher(new \Illuminate\Events\Dispatcher(new Illuminate\Container\Container()));
-        $capsule->setAsGlobal();
-
-        $capsule->bootEloquent();
-        class_alias('\Illuminate\Database\Capsule\Manager', 'DB');
-    }
-
     /**
      * 加载预注入容器的服务
      */
@@ -66,6 +55,18 @@ class Bootstrap extends Bootstrap_Abstract
         if (file_exists(APP_PATH . '/conf/di.php') && $services = require(APP_PATH . '/conf/di.php')) {
             Registry::set('di', new Container($services));
         }
+    }
+
+    public function _initDefaultDbAdapter()
+    {
+        $capsule = new Manager();
+        $capsule->addConnection($this->config['database']);
+        $capsule->setEventDispatcher(new \Illuminate\Events\Dispatcher(new Illuminate\Container\Container()));
+        $capsule->setAsGlobal();
+
+        $capsule->bootEloquent();
+        Registry::get('di')->set('db', $capsule);
+        class_alias('\Illuminate\Database\Capsule\Manager', 'DB');
     }
 
     /**

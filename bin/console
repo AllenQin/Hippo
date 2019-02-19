@@ -1,0 +1,24 @@
+#!/usr/bin/env php
+<?php
+use Yaf\Application as YafApplication;
+use Symfony\Component\Console\Application;
+
+set_time_limit(0);
+define('APP_PATH', dirname(__DIR__));
+
+$app = new YafApplication(APP_PATH . '/conf/application.ini', ini_get('yaf.environ'));
+$app->bootstrap();
+
+$commandPath = APP_PATH . '/application/command';
+$application = new Application();
+$app_list = [];
+
+foreach (glob($commandPath.'/*Command.php') as $row){
+    $class = sprintf('Command\\%s', basename($row, '.php'));
+    $object = new ReflectionClass($class);
+    $app_list[] = $object->newInstance();
+}
+
+$application->addCommands($app_list);
+$application->setAutoExit(false);
+$application->run();

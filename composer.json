@@ -12,15 +12,17 @@
         "nesbot/carbon": "^1.21",
         "league/csv": "^8.1",
         "tightenco/collect": "^5.3",
-        "illuminate/support": "^5.7",
+        "illuminate/support": "5.5.*",
         "guzzlehttp/guzzle": "~6.0",
         "symfony/event-dispatcher": "^4.2",
         "catfan/medoo": "^1.6",
         "chrisboulton/php-resque": "^1.2",
         "filp/whoops": "^2.3",
-        "illuminate/database": "^5.7",
-        "illuminate/events": "^5.7",
-        "doctrine/dbal": "^2.9"
+        "illuminate/database": "5.5.*",
+        "illuminate/events": "5.5.*",
+        "doctrine/dbal": "^2.9",
+        "symfony/var-dumper": "^4.2",
+        "symfony/console": "^4.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.4",
@@ -33,7 +35,8 @@
             "App\\Helpers\\": "application/helpers",
             "App\\Defines\\": "application/defines",
             "App\\Library\\Core\\": "application/library/Core",
-            "App\\Models\\":"application/models"
+            "App\\Models\\":"application/models",
+            "Command\\":"application/command/"
         }
     },
     "repositories": {

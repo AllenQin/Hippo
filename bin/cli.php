@@ -2,6 +2,7 @@
 use Yaf\Application;
 use Yaf\Request\Simple;
 
+set_time_limit(0);
 define('APP_PATH', dirname(__DIR__));
 
 if ($argc == 1) {
