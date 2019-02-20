@@ -11,7 +11,7 @@ class ApiController extends BaseController
 
     public function init()
     {
-        if ($this->config['application']['debug'] === false) {
+        if (!$this->config['application']['debug']) {
             header('Content-type:text/json');
             set_exception_handler([$this, 'catchException']);
         }

@@ -22,7 +22,8 @@
         "illuminate/events": "5.5.*",
         "doctrine/dbal": "^2.9",
         "symfony/var-dumper": "^4.2",
-        "symfony/console": "^4.2"
+        "symfony/console": "^4.2",
+        "illuminate/validation": "5.5.*"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.4",

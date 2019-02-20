@@ -2,6 +2,7 @@
 use App\Library\Core\Cache\Redis;
 use App\Library\Core\Database\MySQL;
 use App\Library\Core\Queue\HQueue;
+use App\Library\Core\Validators\Assert;
 use GuzzleHttp\Client;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -24,6 +25,7 @@ return [
     },
     'assert' => function($c) {
         // @todo use validators
+        return new Assert();
     },
     'httpClient' => function($c) {
         return new Client();
