@@ -8,7 +8,7 @@ class Controller extends BaseController
 {
     public function init()
     {
-        if ($this->config['application']['debug'] === false) {
+        if (!$this->config['application']['debug']) {
             set_exception_handler([$this, 'catchException']);
         }
     }

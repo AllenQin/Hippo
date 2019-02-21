@@ -24,8 +24,7 @@ return [
         return new EventDispatcher();
     },
     'assert' => function($c) {
-        // @todo use validators
-        return new Assert();
+        return new Assert($c);
     },
     'httpClient' => function($c) {
         return new Client();

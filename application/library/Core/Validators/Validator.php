@@ -1,78 +1,94 @@
 <?php
 namespace App\Library\Core\Validators;
 
-use App\Library\Core\Di\InjectionWareInterface;
-use App\Library\Core\Di\InjectionWareTrait;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\MessageBag;
+use Illuminate\Translation\FileLoader;
+use Illuminate\Translation\Translator;
 use Illuminate\Validation\Factory;
 
-class Validator extends Factory implements InjectionWareInterface
+class Validator
 {
-    use InjectionWareTrait;
-    private static $message = 'ok';
-    private static $headers = [
-            'e' => 'rules/data is empty',
-            'na' => 'rules/data is not a array'
-    ];
+    public static $_instance = null;
 
-    /***
-     * 创建实例
-     *
-     * @return \Illuminate\Validation\Factory
-     */
-    public static function getInstance()
+    private $validator;
+
+    private $message;
+
+    /* @var MessageBag $messageBag */
+    private $messageBag;
+
+    private function __construct($config)
     {
-        static $validator = null;
-        if ($validator === null) {
-            $test_translation_path = __DIR__ . '/lang';
-            $test_translation_locale = 'en';
-            $translation_file_loader = new \Illuminate\Translation\FileLoader(new \Illuminate\Filesystem\Filesystem, $test_translation_path);
-            $translator = new \Illuminate\Translation\Translator($translation_file_loader, $test_translation_locale);
-            $validator = new \Illuminate\Validation\Factory($translator);
+        $translationLoader = new FileLoader(new Filesystem(), $config['validator']['language_path']);
+        $this->validator = new Factory(new Translator($translationLoader, $config['validator']['language']));
+    }
+
+    public static function getInstance($config)
+    {
+        if (null == self::$_instance) {
+            self::$_instance = new Validator($config);
         }
-        return $validator;
+
+        return self::$_instance;
     }
 
     /**
-     * @param array $rules 验证规则
-     * @param array $data 验证数据
+     * 验证数据
+     *
+     * @param $rule
+     * @param $data
+     * @param array $messages
+     * @param array $attributes
      * @return bool
      */
-    public static function validators($rules = [], $data = [])
+    public function validator($rule, $data, $messages = [], $attributes = [])
     {
-        if (empty($rules) || empty($data)) {
-            self::$message = self::$headers['e'];
+        $this->message = null;
+        if (!$rule || !$data) {
+            $this->message = 'rule/data is not allow empty';
+        }
+
+        if (!is_array($rule) || !is_array($data)) {
+            $this->message = 'rule/data is not array';
+        }
+
+        if ($this->message) {
             return false;
         }
-        if (is_array($rules) && is_array($data)) {
-            $v = self::vmake($rules, $data);
-            if ($v->fails()) {
-                self::$message = $v->messages();
-                return false;
-            }
-            return true;
+
+        $validator = $this->validator->make($data, $rule, $messages, $attributes);
+        if ($validator->fails()) {
+            $this->messageBag = $validator->messages();
+            $this->message = $this->messageBag->all();
+            return false;
         }
-        self::$message = self::$headers['na'];
-        return false;
+
+        return true;
     }
 
     /**
-     * 验证实例
-     * @param $rules
-     * @param $data
-     * @return \Illuminate\Validation\Validator
+     * 获取错误信息
+     *
+     * @return mixed
      */
-    private static function vmake($rules, $data)
+    public function getMessages()
     {
-        $v = self::getInstance()->make($data, $rules);
-        return $v;
+        return $this->message;
     }
 
-    /**
-     * 获取错误消息
-     * @return string
-     */
-    public static function getMessage()
+    public function getFirstMessage($key = null)
     {
-        return self::$message;
+        return $this->messageBag->first($key);
+    }
+
+    private function __clone()
+    {
+
+    }
+
+    private function __sleep()
+    {
+
     }
 }

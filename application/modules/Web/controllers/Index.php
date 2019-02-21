@@ -13,17 +13,16 @@ class IndexController extends Controller
 {
     public function indexAction()
     {
-
         // validator
         $rule = [
-            'username' => 'required|string|min:2|max:10',
+            'username' => 'required|string|min:2|max:5',
         ];
         $data = [
             'username' => 'allenqin',
             'age' => 20,
         ];
 
-        $this->assert->validate($rule, $data);
+        $this->assert->validate($rule, $data, [], ['username' => '用户名']);
 
         $users = UserModel::all();
         $showUsers = $users->transform(function($user){
