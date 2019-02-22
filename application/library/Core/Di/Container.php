@@ -14,7 +14,7 @@ class Container implements ContainerInterface, \ArrayAccess
      * Container constructor.
      * @param $services
      */
-    public function __construct($services)
+    public function __construct($services = [])
     {
         $this->pimple = new PimpleContainer();
 

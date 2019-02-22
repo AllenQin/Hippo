@@ -1,28 +1,22 @@
 <?php
 
-use App\Library\Core\Database\DatabaseInterface;
 use App\Library\Core\MVC\Controller;
-use App\Library\Core\Queue\HQueue;
 use App\Models\Event\OrderPlacedEvent;
-use App\Models\Jobs\OrderJob;
 use Goods\OrderModel;
-use Illuminate\Support\Collection;
 use User\UserModel;
 
 class IndexController extends Controller
 {
     public function indexAction()
     {
-        // validator
         $rule = [
-            'username' => 'required|string|min:2|max:5',
+            'username' => 'required|string|min:2|max:20',
         ];
         $data = [
             'username' => 'allenqin',
             'age' => 20,
         ];
-
-        $this->assert->validate($rule, $data, [], ['username' => '用户名']);
+        $this->assert->validate($rule, $data, [], ['username' => '姓名']);
 
         $users = UserModel::all();
         $showUsers = $users->transform(function($user){

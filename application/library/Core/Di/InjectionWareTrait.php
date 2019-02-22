@@ -1,6 +1,20 @@
 <?php
 namespace App\Library\Core\Di;
 
+use App\Library\Core\Validators\Assert;
+use Monolog\Logger;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+
+/**
+ * Class InjectionWareTrait
+ *
+ * @property Container $di
+ * @property Assert $assert
+ * @property EventDispatcher eventDispatcher
+ * @property Logger $logger
+ *
+ * @package App\Library\Core\Di
+ */
 trait InjectionWareTrait
 {
     public function setDi($di)

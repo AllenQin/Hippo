@@ -15,11 +15,9 @@ class SendListener extends Listener
         /* @var OrderModel $order */
         $order = $event->getOrder();
 
-        /* @var Logger $logger */
         $logger = $this->di->get('logger');
         $logger->debug('order placed event send msg', ['order_id' => $order->getOrderId()]);
 
-        /* @var HQueue $queue */
         $queue = $this->di->get('queue');
 
         $msgBody = [

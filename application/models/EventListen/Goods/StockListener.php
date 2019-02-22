@@ -10,7 +10,6 @@ class StockListener extends Listener
     {
         $goods = $event->getGoods();
 
-        /* @var Logger $logger */
         $logger = $this->di->get('logger');
         $logger->debug('order placed event deduct', ['goods_id' => $goods['id']]);
     }

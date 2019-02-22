@@ -7,8 +7,7 @@ class IndexController extends ApiController
 {
     public function indexAction()
     {
-        /* @var Redis $cache */
-        $cache = $this->cache;
+        $cache = $this->di->get('cache');
         $value = $cache->get('name');
         if ($value === false) {
             $cache->set('name', 'allen', 60);
