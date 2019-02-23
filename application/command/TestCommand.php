@@ -11,7 +11,7 @@ class TestCommand extends Command
     protected function configure()
     {
         $this->setName('app:test')
-            ->setDescription('测试功能')
+            ->setDescription('示例脚本')
             ->addArgument('param1', InputArgument::OPTIONAL, '参数1')
             ->addArgument('param2', InputArgument::OPTIONAL, '参数2');
     }

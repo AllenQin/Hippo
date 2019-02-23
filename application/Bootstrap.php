@@ -26,7 +26,7 @@ class Bootstrap extends Bootstrap_Abstract
     }
 
     /**
-     * 引入自动加载文件
+     * 自动加载文件
      */
     public function _initLoader()
     {
@@ -38,7 +38,7 @@ class Bootstrap extends Bootstrap_Abstract
     }
 
     /**
-     * 开发环境开启调试错误处理
+     * 初始化开发环境开启调试错误处理
      */
     public function _initDebug()
     {
@@ -48,7 +48,7 @@ class Bootstrap extends Bootstrap_Abstract
     }
 
     /**
-     * 加载预注入容器的服务
+     * 初始化预注入容器服务
      */
     public function _initServices()
     {
@@ -57,6 +57,9 @@ class Bootstrap extends Bootstrap_Abstract
         }
     }
 
+    /**
+     * 初始化数据库连接
+     */
     public function _initDefaultDbAdapter()
     {
         $capsule = new Manager();
@@ -70,7 +73,7 @@ class Bootstrap extends Bootstrap_Abstract
     }
 
     /**
-     * 加载监听事件
+     * 初始化监听事件
      */
     public function _initListener()
     {
@@ -91,7 +94,7 @@ class Bootstrap extends Bootstrap_Abstract
     }
 
     /**
-     * 加载自定义路由
+     * 初始化自定义路由
      *
      * @param Dispatcher $dispatcher
      */
@@ -104,7 +107,7 @@ class Bootstrap extends Bootstrap_Abstract
     }
 
     /**
-     * 加载自定义插件
+     * 初始化自定义插件
      *
      * @param Dispatcher $dispatcher
      */
