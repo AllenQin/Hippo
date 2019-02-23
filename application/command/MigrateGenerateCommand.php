@@ -1,6 +1,8 @@
 <?php
 namespace Command;
 
+use Symfony\Component\Console\Input\InputArgument;
+
 class MigrateGenerateCommand extends BaseMigrate
 {
     protected function configure()

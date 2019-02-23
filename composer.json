@@ -38,7 +38,8 @@
             "App\\Defines\\": "application/defines",
             "App\\Library\\Core\\": "application/library/Core",
             "App\\Models\\":"application/models",
-            "Command\\":"application/command/"
+            "Command\\":"application/command/",
+            "ProxyManagerGeneratedProxy\\":"application/services"
         }
     },
     "repositories": {

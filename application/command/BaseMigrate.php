@@ -48,6 +48,7 @@ class BaseMigrate extends Command
         $configuration->setMigrationsNamespace('db\migrations');
         $configuration->setMigrationsTableName('migrations');
         $configuration->setMigrationsDirectory($config['migrate_db_path']);
+        $configuration->setAllOrNothing(true);
 
         $helperSet = new HelperSet([
             'question' => new QuestionHelper(),
@@ -55,9 +56,8 @@ class BaseMigrate extends Command
             new ConfigurationHelper($connection, $configuration),
         ]);
 
-        $cli = ConsoleRunner::createApplication($helperSet);
         try {
-            $cli->run();
+            ConsoleRunner::run($helperSet);
         } catch (\Exception $e) {
             echo $e->getMessage();
             exit();

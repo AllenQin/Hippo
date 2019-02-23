@@ -19,12 +19,11 @@ final class Version20190223014902 extends AbstractMigration
 
     public function up(Schema $schema) : void
     {
-        /*
         $table = $schema->createTable('posts');
         $table->addColumn('id', 'integer')->setUnsigned(true)->setAutoincrement(true);
         $table->addColumn('name', 'string')->setDefault('')->setLength(20);
+        $table->addOption('comment', 'user post');
         $table->setPrimaryKey(['id']);
-        */
     }
 
     public function down(Schema $schema) : void
