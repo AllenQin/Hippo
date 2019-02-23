@@ -9,7 +9,7 @@ Trait ApiTrait
      * 请求成功 json返回
      * @param $data
      */
-    public function success($data) {
+    public function success($data = []) {
         echo json_encode([
             'code' => OuterCode::SUCCESS,
             'data' => $data,

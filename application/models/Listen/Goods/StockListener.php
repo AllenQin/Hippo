@@ -1,5 +1,5 @@
 <?php
-namespace App\Models\EventListen\Goods;
+namespace App\Models\Listen\Goods;
 
 use App\Library\Core\Event\Listener;
 use Symfony\Component\EventDispatcher\Event;

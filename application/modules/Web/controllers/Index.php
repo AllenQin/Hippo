@@ -2,8 +2,8 @@
 
 use App\Library\Core\MVC\Controller;
 use App\Models\Event\OrderPlacedEvent;
-use Goods\OrderModel;
-use User\UserModel;
+use Entity\OrderModel;
+use Entity\UserModel;
 
 class IndexController extends Controller
 {

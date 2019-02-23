@@ -2,27 +2,15 @@
 
 use App\Library\Core\Cache\Redis;
 use App\Library\Core\MVC\ApiController;
+use App\Models\Repositories\UserRepository;
+use Entity\UserModel;
 
 class IndexController extends ApiController
 {
     public function indexAction()
     {
-        $cache = $this->di->get('cache');
-        $value = $cache->get('name');
-        if ($value === false) {
-            $cache->set('name', 'allen', 60);
-        }
+        $user = $this->di->get('userRepository')->load(1);
 
-        $rule = [
-            'username' => 'required|string|min:2|max:5',
-        ];
-        $data = [
-            'username' => 'allenqin',
-            'age' => 20,
-        ];
-
-        $this->assert->validate($rule, $data);
-
-        return $this->success(['content' => $value]);
+        return $this->success($user);
     }
 }

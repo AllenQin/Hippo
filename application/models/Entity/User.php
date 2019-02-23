@@ -1,5 +1,5 @@
 <?php
-namespace User;
+namespace Entity;
 use App\Library\Core\MVC\EloquentModel;
 
 
@@ -7,6 +7,7 @@ use App\Library\Core\MVC\EloquentModel;
  * Class UserModel
  * @package User
  *
+ * @property integer $id
  * @property string $user_name
  * @property integer $age
  */

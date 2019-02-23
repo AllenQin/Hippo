@@ -1,8 +1,9 @@
 <?php
 use App\Library\Core\Cache\Redis;
-use App\Library\Core\Database\MySQL;
 use App\Library\Core\Queue\HQueue;
 use App\Library\Core\Validators\Assert;
+use App\Models\Repositories\UserRepository;
+use Entity\UserModel;
 use GuzzleHttp\Client;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -34,5 +35,8 @@ return [
         $Log->pushHandler(new StreamHandler($c['config']['log']['path'] . '/'
             . date($c['config']['log']['file_format']) . '.log', Logger::DEBUG));
         return $Log;
-    }
+    },
+    'userRepository' => function($c) {
+        return new UserRepository(new UserModel());
+    },
 ];

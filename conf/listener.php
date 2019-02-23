@@ -1,6 +1,6 @@
 <?php
-use App\Models\EventListen\Goods\StockListener;
-use App\Models\EventListen\Message\SendListener;
+use App\Models\Listen\Goods\StockListener;
+use App\Models\Listen\Message\SendListener;
 use Symfony\Component\EventDispatcher\Event;
 
 return [

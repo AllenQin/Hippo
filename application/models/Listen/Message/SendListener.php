@@ -1,12 +1,10 @@
 <?php
-namespace App\Models\EventListen\Message;
+namespace App\Models\Listen\Message;
 
 use App\Library\Core\Event\Listener;
 use App\Models\Jobs\MessageJob;
-use Goods\OrderModel;
-use Monolog\Logger;
+use Entity\OrderModel;
 use Symfony\Component\EventDispatcher\Event;
-use App\Library\Core\Queue\HQueue;
 
 class SendListener extends Listener
 {
