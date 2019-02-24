@@ -83,6 +83,29 @@ class Redis implements CacheInterface
         return $this->_instance->exists($key);
     }
 
+    public function hSet($key, $field, $value, $duration = 0)
+    {
+        $key = $this->buildKey($key);
+        $result = $this->_instance->hSet($key, $field, $value);
+        if ($duration) {
+            $this->_instance->expire($key, $duration);
+        }
+
+        return $result;
+    }
+
+    public function hGet($key, $field)
+    {
+        $key = $this->buildKey($key);
+        return $this->_instance->hGet($key, $field);
+    }
+
+    public function hGetAll($key)
+    {
+        $key = $this->buildKey($key);
+        return $this->_instance->hGetAll($key);
+    }
+
     /**
      * @param $key
      * @return mixed

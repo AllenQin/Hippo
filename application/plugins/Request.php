@@ -11,6 +11,10 @@ class RequestPlugin extends Plugin_Abstract
 
     }
 
+    /**
+     * @param \Yaf\Request_Abstract $request
+     * @param \Yaf\Response_Abstract $response
+     */
     public function routerShutdown(\Yaf\Request_Abstract $request, \Yaf\Response_Abstract $response)
     {
         /* @var Logger $Logger */
@@ -29,8 +33,8 @@ class RequestPlugin extends Plugin_Abstract
     }
 
     /**
-     * @param Request_Abstract $request
-     * @param Response_Abstract $response
+     * @param \Yaf\Request_Abstract $request
+     * @param \Yaf\Response_Abstract $response
      */
     public function dispatchLoopShutdown(\Yaf\Request_Abstract $request, \Yaf\Response_Abstract $response)
     {

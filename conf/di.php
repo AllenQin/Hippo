@@ -1,6 +1,7 @@
 <?php
 use App\Library\Core\Cache\Redis;
 use App\Library\Core\Queue\HQueue;
+use App\Library\Core\Session\SessionBag;
 use App\Library\Core\Validators\Assert;
 use App\Models\Repositories\UserRepository;
 use Entity\UserModel;
@@ -15,6 +16,9 @@ return [
         return Registry::get('config');
     },
     'cache' => function($c) {
+        return new Redis($c['config']['redis']);
+    },
+    'redis' => function($c) {
         return new Redis($c['config']['redis']);
     },
     'queue' => function($c) {
@@ -38,5 +42,8 @@ return [
     },
     'userRepository' => function($c) {
         return new UserRepository(new UserModel());
+    },
+    'sessionBag' => function($c) {
+        return SessionBag::getInstance($c['redis']);
     },
 ];
