@@ -1,16 +1,18 @@
 <?php
-use App\Models\Listen\Goods\StockListener;
-use App\Models\Listen\Message\SendListener;
-use Symfony\Component\EventDispatcher\Event;
 
+/**
+ * 绑定全局监听事件
+ *
+ *  'order.placed' => [
+ *      function(Event $event) {
+ *          return (new StockListener())->onOrderPlaced($event);
+ *      },
+ *      function(Event $event) {
+ *          return (new SendListener())->onOrderPlaced($event);
+ *      },
+ *      // ...
+ *  ],
+ */
 return [
-    'order.placed' => [
-        function(Event $event) {
-            return (new StockListener())->onOrderPlaced($event);
-        },
-        function(Event $event) {
-            return (new SendListener())->onOrderPlaced($event);
-        },
-        // ...
-    ],
+
 ];
