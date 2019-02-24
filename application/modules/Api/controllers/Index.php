@@ -6,7 +6,9 @@ class IndexController extends ApiController
 {
     public function indexAction()
     {
-        $user = $this->di->get('userRepository')->load(1);
+        $uid = $this->getQuery('id', 0);
+
+        $user = $this->di->get('userRepository')->load($uid);
         return $this->success($user);
     }
 }
