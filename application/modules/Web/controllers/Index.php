@@ -8,4 +8,9 @@ class IndexController extends Controller
     {
         $this->display('index', ['content' => 'Hello Hippo!']);
     }
+
+    public function testAction()
+    {
+        $this->getResponse()->setBody('test string');
+    }
 }

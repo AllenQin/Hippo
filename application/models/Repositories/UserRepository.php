@@ -41,7 +41,7 @@ class UserRepository
 
     public function getUserListForApi($offset, $limit)
     {
-        $users = UserModel::all();
+        $users = UserModel::take($limit)->skip($offset)->get();
         $users = $users->transform(function($user){
             return [
                 'id' => $user->id,
