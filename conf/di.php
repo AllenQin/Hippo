@@ -22,8 +22,7 @@ return [
         return new Redis($c['config']['redis']);
     },
     'queue' => function($c) {
-        $queue = new HQueue($c['config']['queue']);
-        return $queue;
+        return new HQueue($c['config']['queue']);
     },
     'eventDispatcher' => function($c) {
         return new EventDispatcher();
