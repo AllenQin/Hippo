@@ -5,6 +5,11 @@ use App\Library\Core\Di\InjectionWareInterface;
 use App\Library\Core\Di\InjectionWareTrait;
 use Yaf\Controller_Abstract;
 
+/**
+ * Class BaseController
+ *
+ * @package App\Library\Core\MVC
+ */
 class BaseController extends Controller_Abstract implements InjectionWareInterface
 {
     use InjectionWareTrait;

@@ -1,32 +1,29 @@
 <?php
 namespace App\Library\Core\Validators;
 
-use App\Defines\OuterCode;
-use App\Library\Core\Di\InjectionWareInterface;
-use App\Library\Core\Di\InjectionWareTrait;
-use App\Library\Core\Validators\Validator;
-
-class Assert implements InjectionWareInterface
+class Assert
 {
-    use InjectionWareTrait;
-
     /* @var Validator $validator */
     protected $validator;
+
+    private $errorMessage;
 
     public function __construct($container)
     {
         $this->validator = Validator::getInstance($container['config']);
     }
 
-    public function validate($rule, $input, $message = [], $attributes = [], $code = OuterCode::PARAMETER_ERROR)
+    public function validate($rule, $input, $message = [], $attributes = [], $code = null)
     {
+        $this->errorMessage = [];
         if ($this->validator->validator($rule, $input, $message, $attributes)) {
             return true;
         } else {
+            $this->errorMessage = $this->validator->getMessages();
             if ($code) {
                 throw new \Exception($this->validator->getFirstMessage(), $code);
             } else {
-                return $this->validator->getFirstMessage();
+                return false;
             }
         }
     }
@@ -34,6 +31,16 @@ class Assert implements InjectionWareInterface
     public function getValidator()
     {
         return $this->validator;
+    }
+
+    public function getErrorMessage()
+    {
+        return $this->errorMessage;
+    }
+
+    public function getFirstMessage()
+    {
+        return $this->errorMessage ? $this->errorMessage[0] : null;
     }
 }
 

@@ -45,18 +45,6 @@ class Validator
     public function validator($rule, $data, $messages = [], $attributes = [])
     {
         $this->message = null;
-        if (!$rule || !$data) {
-            $this->message = 'rule/data is not allow empty';
-        }
-
-        if (!is_array($rule) || !is_array($data)) {
-            $this->message = 'rule/data is not array';
-        }
-
-        if ($this->message) {
-            return false;
-        }
-
         $validator = $this->validator->make($data, $rule, $messages, $attributes);
         if ($validator->fails()) {
             $this->messageBag = $validator->messages();
