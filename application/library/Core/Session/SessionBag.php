@@ -6,26 +6,24 @@ use App\Library\Core\Cache\Redis;
 /**
  * Class SessionBag
  *
- * @property Redis $redis;
  * @package App\Library\Core\Session
  */
 class SessionBag
 {
     private static $_instance = null;
-    private $redis;
+    private $storage;
     private $sessionId = null;
 
-    private function __construct($redis)
+    private function __construct(StorageInterface $storage)
     {
-        session_start();
-        $this->redis = $redis;
-        $this->sessionId = session_id();
+        $this->storage = $storage;
+        $this->sessionId = $this->storage->getSessionId();
     }
 
-    public static function getInstance(Redis $redis)
+    public static function getInstance(StorageInterface $storage)
     {
         if (self::$_instance == null) {
-            self::$_instance = new self($redis);
+            self::$_instance = new self($storage);
         }
 
         return self::$_instance;
@@ -33,32 +31,32 @@ class SessionBag
 
     public function get($key)
     {
-        return $this->redis->hGet($this->sessionId, $key);
+        return $this->storage->get($key);
     }
 
     public function set($key, $value)
     {
-        return $this->redis->hSet($this->sessionId, $key, $value);
+        return $this->storage->set($key, $value);
     }
 
     public function getAll()
     {
-        return $this->redis->hGetAll($this->sessionId);
+        return $this->storage->getAll();
     }
 
     public function delete($key)
     {
-        return $this->redis->hSet($this->sessionId, $key, null);
+        return $this->storage->delete($key);
     }
 
     public function destroy()
     {
-        return $this->redis->delete($this->sessionId);
+        return $this->storage->destroy();
     }
 
     public function getSessionId()
     {
-        return $this->sessionId;
+        return $this->storage->getSessionId();
     }
 
     private function __clone()

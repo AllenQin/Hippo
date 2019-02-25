@@ -8,4 +8,10 @@ class IndexController extends Controller
     {
         $this->display('index', ['content' => 'Hello Hippo!']);
     }
+
+    public function loginAction()
+    {
+        $session = $this->di->get('sessionBag');
+        echo $session->getSessionId() . PHP_EOL;
+    }
 }

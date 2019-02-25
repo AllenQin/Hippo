@@ -9,10 +9,4 @@ class IndexController extends ApiController
         $user = $this->di->get('userRepository')->getUserListForApi(0, 3);
         return $this->success($user);
     }
-
-    public function assertAction()
-    {
-        $data = [];
-        return $this->success($data);
-    }
 }
