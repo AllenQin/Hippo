@@ -1,8 +1,6 @@
 <?php
 namespace App\Library\Core\Session;
 
-use App\Library\Core\Cache\Redis;
-
 /**
  * Class SessionBag
  *
@@ -12,12 +10,10 @@ class SessionBag
 {
     private static $_instance = null;
     private $storage;
-    private $sessionId = null;
 
     private function __construct(StorageInterface $storage)
     {
         $this->storage = $storage;
-        $this->sessionId = $this->storage->getSessionId();
     }
 
     public static function getInstance(StorageInterface $storage)

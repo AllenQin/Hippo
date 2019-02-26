@@ -1,7 +1,9 @@
 <?php
 use App\Library\Core\Cache\Redis;
+use App\Library\Core\Encrypt\JWTService;
 use App\Library\Core\Queue\HQueue;
 use App\Library\Core\Session\FileStorage;
+use App\Library\Core\Session\RedisStorage;
 use App\Library\Core\Session\SessionBag;
 use App\Library\Core\Validators\Assert;
 use App\Models\Repositories\UserRepository;
@@ -44,6 +46,12 @@ return [
         return new UserRepository(new UserModel());
     },
     'sessionBag' => function($c) {
-        return SessionBag::getInstance(new FileStorage());
+        return SessionBag::getInstance(new RedisStorage($c));
+    },
+    'cookieSrv' => function($c) {
+        return new App\Library\Core\Cookie\CookieService($c);
+    },
+    'jwtSrv' => function($c) {
+        return new JWTService($c);
     },
 ];

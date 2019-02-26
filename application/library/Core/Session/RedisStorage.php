@@ -1,17 +1,29 @@
 <?php
 namespace App\Library\Core\Session;
 
-use App\Library\Core\Cache\Redis;
-
 class RedisStorage implements StorageInterface
 {
     private $redis;
+    private $cookie;
+    private $authId;
+    private $uniqueId;
 
-    public function __construct(Redis $redis)
+    public function __construct($container)
     {
-        //@todo get or generate unique session id and write cookie
+        $this->redis = $container['redis'];
+        $this->cookie = $container['cookieSrv'];
+        $this->jwt = $container['jwtSrv'];
 
-        $this->redis = $redis;
+        $this->authId = md5($container['config']['auth']['id']);
+
+        if ($this->cookie->exists($this->authId) &&
+            $jwtDecode = $this->jwt->encryptDecode($this->cookie->get($this->authId))) {
+            $this->uniqueId = $jwtDecode->val;
+        } else {
+            $this->uniqueId = md5(uniqid(microtime(true), true));
+            $jwtEncode = $this->jwt->encryptEncode($this->uniqueId);
+            $this->cookie->set($this->authId, $jwtEncode);
+        }
     }
 
     /**
@@ -45,7 +57,7 @@ class RedisStorage implements StorageInterface
      */
     public function set($key, $value)
     {
-        // TODO: Implement set() method.
+        return $this->redis->hSet($this->getSessionId(), $key, $value);
     }
 
     /**
@@ -55,7 +67,7 @@ class RedisStorage implements StorageInterface
      */
     public function getAll()
     {
-        // TODO: Implement getAll() method.
+        return $this->redis->hGetAll($this->getSessionId());
     }
 
     /**
@@ -67,7 +79,7 @@ class RedisStorage implements StorageInterface
      */
     public function delete($key)
     {
-        // TODO: Implement delete() method.
+        return $this->redis->hSet($this->getSessionId(), $key, null);
     }
 
     /**
@@ -79,7 +91,7 @@ class RedisStorage implements StorageInterface
      */
     public function destroy()
     {
-        // TODO: Implement destroy() method.
+        return $this->redis->delete($this->getSessionId());
     }
 
     /**
@@ -89,7 +101,6 @@ class RedisStorage implements StorageInterface
      */
     public function getSessionId()
     {
-        // TODO: Implement getSessionId() method.
+        $this->uniqueId;
     }
-
 }

@@ -6,12 +6,7 @@ class IndexController extends Controller
 {
     public function indexAction()
     {
+        $this->di->get('sessionBag')->set('user_name', 'allen');
         $this->display('index', ['content' => 'Hello Hippo!']);
-    }
-
-    public function loginAction()
-    {
-        $session = $this->di->get('sessionBag');
-        echo $session->getSessionId() . PHP_EOL;
     }
 }
