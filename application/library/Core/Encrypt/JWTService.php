@@ -15,18 +15,19 @@ class JWTService
         $this->iss = $this->aud = $container['config']['cookie']['domain'];
     }
 
-    public function encryptEncode($value)
+    public function encryptEncode($value, $expire = null)
     {
         $timeStamp = time();
-        $token = [
+        $payload = [
             'iss' => $this->iss,
             'aud' => $this->aud,
             'iat' => $timeStamp,
             'nbf' => $timeStamp,
+            'exp' => $expire ? : 86400,
             'val' => $value,
         ];
 
-        return JWT::encode($token, $this->key);
+        return JWT::encode($payload, $this->key);
     }
 
     public function encryptDecode($token)
