@@ -5,6 +5,7 @@ use App\Library\Core\Queue\HQueue;
 use App\Library\Core\Session\RedisStorage;
 use App\Library\Core\Session\SessionBag;
 use App\Library\Core\Validators\Assert;
+use App\Models\Domains\Repositories\User\UserRepository;
 use GuzzleHttp\Client;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -48,4 +49,7 @@ return [
     'jwtSrv' => function($c) {
         return new JWTService($c);
     },
+    'userRepository' => function($c) {
+        return new UserRepository(new UserModel());
+    }
 ];
