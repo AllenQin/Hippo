@@ -34,7 +34,7 @@ class Validator
     }
 
     /**
-     * 验证数据
+     * validator data use define rule
      *
      * @param $rule
      * @param $data
@@ -56,7 +56,7 @@ class Validator
     }
 
     /**
-     * 获取错误信息
+     * Get all error message
      *
      * @return mixed
      */
@@ -65,6 +65,12 @@ class Validator
         return $this->message;
     }
 
+    /**
+     * Get first error message
+     *
+     * @param null $key
+     * @return string
+     */
     public function getFirstMessage($key = null)
     {
         return $this->messageBag->first($key);

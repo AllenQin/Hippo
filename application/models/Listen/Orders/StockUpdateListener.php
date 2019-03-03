@@ -5,7 +5,7 @@ use App\Library\Core\Event\Listener;
 use App\Models\Events\Orders\OrderPayEvent;
 use App\Models\Events\Orders\OrderPlacedEvent;
 
-class StockListener extends Listener implements IOrderListener
+class StockUpdateListener extends Listener implements IOrderListener
 {
     /**
      * order pay event

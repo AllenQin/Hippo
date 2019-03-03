@@ -13,7 +13,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  *
  * @package App\Library\Core\Database
  */
-class MySQL implements DatabaseInterface, InjectionWareInterface
+class MedooMySQL implements DatabaseInterface, InjectionWareInterface
 {
     use InjectionWareTrait;
 
@@ -63,7 +63,7 @@ class MySQL implements DatabaseInterface, InjectionWareInterface
         // TODO: Implement delete() method.
     }
 
-    public function query($sql)
+    public function execute($sql)
     {
         // TODO: Implement query() method.
     }

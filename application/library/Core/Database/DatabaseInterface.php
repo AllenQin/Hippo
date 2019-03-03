@@ -13,7 +13,7 @@ Interface DatabaseInterface
 
     public function delete($table, $where);
 
-    public function query($sql);
+    public function execute($sql);
 
     // other method
     // ...
