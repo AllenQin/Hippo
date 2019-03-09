@@ -1,16 +1,17 @@
 <?php
 use App\Library\Core\Cache\Redis;
 use App\Library\Core\Encrypt\JWTService;
+use App\Library\Core\Log\LogWrapper;
 use App\Library\Core\Queue\HQueue;
+use App\Library\Core\Session\FileStorage;
 use App\Library\Core\Session\RedisStorage;
 use App\Library\Core\Session\SessionBag;
 use App\Library\Core\Validators\Assert;
 use App\Models\Domains\Repositories\User\UserRepository;
 use GuzzleHttp\Client;
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Yaf\Registry;
+use App\Library\Core\Cookie\CookieService;
 
 return [
     'config' => function($c) {
@@ -35,16 +36,13 @@ return [
         return new Client();
     },
     'logger' => function($c) {
-        $Log = new Logger($c['config']['log']['channel']);
-        $Log->pushHandler(new StreamHandler($c['config']['log']['path'] . '/'
-            . date($c['config']['log']['file_format']) . '.log', Logger::DEBUG));
-        return $Log;
+        return (new LogWrapper($c))->getLogInstance();
     },
     'sessionBag' => function($c) {
         return SessionBag::getInstance(new RedisStorage($c));
     },
     'cookieSrv' => function($c) {
-        return new App\Library\Core\Cookie\CookieService($c);
+        return new CookieService($c);
     },
     'jwtSrv' => function($c) {
         return new JWTService($c);

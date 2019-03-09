@@ -23,7 +23,7 @@ class JWTService
             'aud' => $this->aud,
             'iat' => $timeStamp,
             'nbf' => $timeStamp,
-            'exp' => $expire ? : 86400,
+            'exp' => $expire ? : $timeStamp + 86400,
             'val' => $value,
         ];
 

@@ -39,7 +39,7 @@ class FileStorage implements StorageInterface
      */
     public function set($key, $value)
     {
-        return $_SERVER[$key] = $value;
+        return $_SESSION[$key] = $value;
     }
 
     /**

@@ -12,6 +12,6 @@ class OrderJob extends Job implements IJob
 {
     public function perform()
     {
-        $this->logger->info('order job perform', $this->args);
+        $this->logger->debug('order job perform', [$this->args]);
     }
 }
