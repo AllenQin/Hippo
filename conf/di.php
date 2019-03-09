@@ -3,7 +3,6 @@ use App\Library\Core\Cache\Redis;
 use App\Library\Core\Encrypt\JWTService;
 use App\Library\Core\Log\LogWrapper;
 use App\Library\Core\Queue\HQueue;
-use App\Library\Core\Session\FileStorage;
 use App\Library\Core\Session\RedisStorage;
 use App\Library\Core\Session\SessionBag;
 use App\Library\Core\Validators\Assert;

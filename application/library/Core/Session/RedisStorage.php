@@ -6,6 +6,7 @@ use App\Library\Core\Encrypt\JWTService;
 
 class RedisStorage implements StorageInterface
 {
+    /** @var  \Redis $redis */
     private $redis;
     private $authId;
     private $uniqueId;
