@@ -10,6 +10,7 @@ use Doctrine\DBAL\Types\Type;
 use Doctrine\Migrations\Configuration\Configuration;
 use Doctrine\Migrations\Tools\Console\ConsoleRunner;
 use Doctrine\Migrations\Tools\Console\Helper\ConfigurationHelper;
+use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -19,12 +20,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 class BaseMigrate extends Command
 {
     use InjectionWareTrait;
-
-    protected function configure()
-    {
-        $this->setName('migrations:generate')
-            ->setDescription('创建数据库迁移脚本');
-    }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -45,7 +40,7 @@ class BaseMigrate extends Command
             exit();
         }
 
-        // @todo register all custom mysql file types
+        // register all custom mysql file types
         Type::addType(TinyIntType::TYPENAME, 'db\types\TinyIntType');
         $connection->getDatabasePlatform()->registerDoctrineTypeMapping(TinyIntType::TYPENAME, TinyIntType::TYPENAME);
 
@@ -56,11 +51,10 @@ class BaseMigrate extends Command
         $configuration->setMigrationsDirectory($config['migrate_db_path']);
         $configuration->setAllOrNothing(true);
 
-        $helperSet = new HelperSet([
-            'question' => new QuestionHelper(),
-            'db' => new ConnectionHelper($connection),
-            new ConfigurationHelper($connection, $configuration),
-        ]);
+        $helperSet = new HelperSet();
+        $helperSet->set(new QuestionHelper(), 'question');
+        $helperSet->set(new ConnectionHelper($connection), 'db');
+        $helperSet->set(new ConfigurationHelper($connection, $configuration));
 
         try {
             ConsoleRunner::run($helperSet);

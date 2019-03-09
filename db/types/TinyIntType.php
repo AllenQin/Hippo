@@ -5,6 +5,12 @@ use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 
+/**
+ * Class TinyIntType
+ * Add MySQL column tinyint type
+ *
+ * @package Db\Types
+ */
 class TinyIntType extends Type
 {
     const TYPENAME = 'tinyint';
