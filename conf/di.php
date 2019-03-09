@@ -45,8 +45,5 @@ return [
     },
     'jwtSrv' => function($c) {
         return new JWTService($c);
-    },
-    'userRepository' => function($c) {
-        return new UserRepository(new UserModel());
     }
 ];
