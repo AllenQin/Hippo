@@ -20,6 +20,7 @@ class ApiController extends BaseController
         if ($e instanceof Action) {
             return $this->error(OuterCode::NOT_DEFINED_ACTION, 'not find action');
         } else {
+            $this->logger->error('request error', [$e->getMessage()]);
             return $this->error($e->getCode(), $e->getMessage());
         }
     }

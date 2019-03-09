@@ -1,7 +1,6 @@
 <?php
 namespace App\Library\Core\MVC;
 
-use Yaf\Application;
 use Yaf\Exception\LoadFailed\Action;
 
 class Controller extends BaseController
@@ -13,15 +12,14 @@ class Controller extends BaseController
         }
     }
 
-    public function catchException($e)
+    public function catchException(\Exception $e)
     {
         if ($e instanceof Action) {
-            // not find action
+            // @todo response error action page
 
         } else {
-            // @todo log
+            $this->logger->error('request error', [$e->getMessage()]);
+            // @todo response error page
         }
-
-        die();
     }
 }
