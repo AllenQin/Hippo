@@ -2,6 +2,7 @@
 namespace Command;
 
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class MigrateRunCommand extends BaseMigrate
 {
@@ -9,6 +10,7 @@ class MigrateRunCommand extends BaseMigrate
     {
         $this->setName('migrations:migrate')
             ->setDescription('执行迁移命令')
+            ->addOption('--dry-run', null, InputOption::VALUE_OPTIONAL, '显示变更SQL 不执行操作')
             ->addArgument('params', InputArgument::OPTIONAL, '迁移版本');
     }
 }

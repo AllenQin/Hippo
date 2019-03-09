@@ -20,12 +20,12 @@ final class Version20190223014902 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         $table = $schema->createTable('posts');
-        $table->addColumn('id', 'integer')->setLength(1)->setUnsigned(true)->setAutoincrement(true);
+        $table->addColumn('id', 'integer')->setUnsigned(true)->setAutoincrement(true);
         $table->addColumn('title', 'string')->setDefault('')->setLength(20)->setComment('post title');
         $table->addColumn('body', 'text')->setDefault('')->setComment('post body');
-        $table->addColumn('created_at', 'integer')->setLength(1)->setUnsigned(true)->setDefault(0)
+        $table->addColumn('created_at', 'integer')->setUnsigned(true)->setDefault(0)
             ->setComment('create unix timestamp');
-        $table->addColumn('updated_at', 'integer')->setLength(1)->setUnsigned(true)->setDefault(0)
+        $table->addColumn('updated_at', 'integer')->setUnsigned(true)->setDefault(0)
             ->setComment('last update unix timestamp');
 
         $table->addOption('comment', 'user posts');

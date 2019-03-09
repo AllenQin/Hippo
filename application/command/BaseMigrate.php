@@ -2,9 +2,11 @@
 namespace Command;
 
 use App\Library\Core\Di\InjectionWareTrait;
+use Db\Types\TinyIntType;
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper;
+use Doctrine\DBAL\Types\Type;
 use Doctrine\Migrations\Configuration\Configuration;
 use Doctrine\Migrations\Tools\Console\ConsoleRunner;
 use Doctrine\Migrations\Tools\Console\Helper\ConfigurationHelper;
@@ -42,6 +44,10 @@ class BaseMigrate extends Command
             echo $e->getMessage();
             exit();
         }
+
+        // @todo register all custom mysql file types
+        Type::addType(TinyIntType::TYPENAME, 'db\types\TinyIntType');
+        $connection->getDatabasePlatform()->registerDoctrineTypeMapping(TinyIntType::TYPENAME, TinyIntType::TYPENAME);
 
         $configuration = new Configuration($connection);
         $configuration->setName('Doctrine Migrations');
