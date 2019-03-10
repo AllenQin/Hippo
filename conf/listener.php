@@ -13,6 +13,13 @@
  *      // ...
  *  ],
  */
-return [
+use App\Model\Events\User\UserSignUpEvent;
+use App\Model\Listen\User\SignUpListen;
 
+return [
+    'user.SingUp' => [
+        function(UserSignUpEvent $event) {
+            return (new SignUpListen())->onSignUp($event);
+        },
+    ]
 ];

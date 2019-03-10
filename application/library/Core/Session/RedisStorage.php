@@ -74,6 +74,17 @@ class RedisStorage implements StorageInterface
     }
 
     /**
+     * set up multiple items to session
+     *
+     * @param $data
+     * @return mixed
+     */
+    public function multipleSet($data)
+    {
+        return $this->redis->hMset($this->getSessionId(), $data);
+    }
+
+    /**
      * get session all items value
      *
      * @return mixed

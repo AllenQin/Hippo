@@ -1,37 +1,24 @@
 <?php
 namespace App\Model\Domains\Repositories\User;
 
-use App\Model\User;
+use App\Defines\User;
+use App\Model\Domains\Repositories\AbstractRepository;
 
-
-class UserRepository
+/**
+ * Class UserRepository
+ *
+ * @package App\Model\Domains\Repositories\User
+ */
+class UserRepository extends AbstractRepository
 {
-    protected $user;
-
-    public function __construct(User $user)
-    {
-        $this->user = $user;
-    }
-
     /**
-     * find user entity
-     *
-     * @param $id
-     * @return User
+     * @return mixed
      */
-    public function find($id)
+    public function getAllUserActivated()
     {
-        return $this->user->find($id);
-    }
-
-    public function findByUserName($userName)
-    {
-        return $this->user->where('username', $userName)->get();
-    }
-
-    public function findByToken($token)
-    {
-        return $this->user->where('token', $token)->get();
+        return $this->model->where('status', User::STATUS_ACTIVATED)
+            ->orderBy('created_at', 'desc')
+            ->get();
     }
 }
 

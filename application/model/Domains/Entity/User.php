@@ -1,7 +1,8 @@
 <?php
-namespace App\Model;
+namespace App\Model\Domains\Entity;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Library\Core\MVC\EloquentModel;
+
 
 /**
  * Class User
@@ -17,12 +18,13 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Model
  */
-class User extends Model
+class User extends EloquentModel
 {
     protected $table = 'users';
 
-    protected $fillable = ['username', 'nickname', 'token', 'password', 'status'];
+    protected $fillable = ['username', 'nickname', 'password', 'token', 'status'];
     protected $hidden = ['password', 'token'];
 
-    protected $dateFormat = 'U';
+    // other relation
+    // this->belongsTo Or $this->belongsToMany
 }

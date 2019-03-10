@@ -44,10 +44,11 @@ class Validator
      */
     public function validator($rule, $data, $messages = [], $attributes = [])
     {
-        $this->message = null;
+        $this->message = [];
         $validator = $this->validator->make($data, $rule, $messages, $attributes);
+        $this->messageBag = $validator->messages();
+
         if ($validator->fails()) {
-            $this->messageBag = $validator->messages();
             $this->message = $this->messageBag->all();
             return false;
         }
@@ -74,6 +75,13 @@ class Validator
     public function getFirstMessage($key = null)
     {
         return $this->messageBag->first($key);
+    }
+
+    public function pushErrorMessage($field, $message)
+    {
+        $this->message[$field] = $message;
+        $this->messageBag->add($field, $message);
+        return true;
     }
 
     private function __clone()

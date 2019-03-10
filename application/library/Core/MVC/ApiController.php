@@ -11,7 +11,7 @@ class ApiController extends BaseController
 
     public function init()
     {
-        header('Content-type:text/json');
+        header('Content-type:text/json;charset=utf-8');
         set_exception_handler([$this, 'catchException']);
     }
 

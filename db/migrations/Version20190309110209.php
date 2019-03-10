@@ -39,13 +39,13 @@ final class Version20190309110209 extends AbstractMigration
             ->setComment('user nickname');
 
         $table->addColumn('password', 'string')
-            ->setLength(32)
+            ->setLength(64)
             ->setNotnull(true)
             ->setDefault('')
             ->setComment('user password');
 
         $table->addColumn('token', 'string')
-            ->setLength(50)
+            ->setLength(128)
             ->setNotnull(true)
             ->setDefault('')
             ->setComment('user access token');

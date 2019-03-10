@@ -29,6 +29,14 @@ interface StorageInterface
     public function set($key, $value);
 
     /**
+     * set up multiple items to session
+     *
+     * @param $data
+     * @return mixed
+     */
+    public function multipleSet($data);
+
+    /**
      * get session all items value
      *
      * @return mixed

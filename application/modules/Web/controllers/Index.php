@@ -6,8 +6,13 @@ class IndexController extends Controller
 {
     public function indexAction()
     {
-        $user = $this->di->get('userRepository')->find(1);
-        $this->display('index', ['content' => 'Hello, ' . $user->nickname]);
+        if ($username = $this->di->get('sessionBag')->get('username')) {
+            $message = 'Hello, ' . $username;
+        } else {
+            $message = 'Hello, Hippo!';
+        }
+
+        $this->display('index', ['content' => $message]);
     }
 
     /**

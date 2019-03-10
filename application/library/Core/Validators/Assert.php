@@ -40,7 +40,14 @@ class Assert
 
     public function getFirstMessage()
     {
-        return $this->errorMessage ? $this->errorMessage[0] : null;
+        reset($this->errorMessage);
+        return $this->errorMessage ? current($this->errorMessage) : null;
+    }
+
+    public function pushErrorMessage($key, $message)
+    {
+        $this->errorMessage[$key] = $message;
+        return $this->validator->pushErrorMessage($key, $message);
     }
 }
 

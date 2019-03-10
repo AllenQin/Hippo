@@ -37,10 +37,10 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\Services\\": "application/services",
-            "App\\Helpers\\": "application/helpers",
-            "App\\Defines\\": "application/defines",
-            "App\\Library\\Core\\": "application/library/Core",
+            "App\\Services\\": "application/services/",
+            "App\\Helpers\\": "application/helpers/",
+            "App\\Defines\\": "application/defines/",
+            "App\\Library\\Core\\": "application/library/Core/",
             "App\\Model\\":"application/model/",
             "Command\\":"application/command/",
             "Db\\Types\\":"db/types/"

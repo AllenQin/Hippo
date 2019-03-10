@@ -94,6 +94,14 @@ class Redis implements CacheInterface
         return $result;
     }
 
+    public function hMset($key, $data)
+    {
+        $key = $this->buildKey($key);
+        $result = $this->_instance->hMset($key, $data);
+
+        return $result;
+    }
+
     public function hGet($key, $field)
     {
         $key = $this->buildKey($key);

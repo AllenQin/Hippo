@@ -6,7 +6,7 @@ use App\Library\Core\Queue\HQueue;
 use App\Library\Core\Session\RedisStorage;
 use App\Library\Core\Session\SessionBag;
 use App\Library\Core\Validators\Assert;
-use App\Model\User;
+use App\Model\Domains\Entity\User;
 use GuzzleHttp\Client;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Yaf\Registry;

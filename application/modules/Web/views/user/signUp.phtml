@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/user_signup.css">
+    <title>User sign up</title>
+</head>
+<body>
+<form class="form-signin" method="post" action="/web/user/signup">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+    <label for="inputUsername" class="sr-only">Username</label>
+    <input type="phone" name="username" id="inputUsername" class="form-control" placeholder="Phone" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <label for="inputRepeatPassword" class="sr-only">Repeat Password</label>
+    <input type="password" name="password_confirmation" id="inputRepeatPassword" class="form-control" placeholder="Repeat Password" required>
+    <?php
+        foreach ($errorMsg as $field => $msg):
+    ?>
+            <div class="alert alert-danger" role="alert"><?=$msg?></div>
+    <?php
+        endforeach;
+    ?>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+</form>
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -43,6 +43,20 @@ class FileStorage implements StorageInterface
     }
 
     /**
+     * set up multiple items to session
+     *
+     * @param $data
+     * @return mixed
+     */
+    public function multipleSet($data)
+    {
+        foreach ($data as $key => $value) {
+            $_SESSION[$key] = $value;
+        }
+        return true;
+    }
+
+    /**
      * get session all items value
      *
      * @return mixed
