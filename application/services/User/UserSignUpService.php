@@ -13,6 +13,8 @@ use App\Model\Events\User\UserSignUpEvent;
 class UserSignUpService extends UserService
 {
     /**
+     * User singUp validator rule
+     *
      * @param array $data
      * @return bool
      */
@@ -28,6 +30,8 @@ class UserSignUpService extends UserService
     }
 
     /**
+     * User signUp
+     *
      * @param array $data
      * @param bool $isAutoLogin
      * @return bool|mixed
@@ -54,15 +58,16 @@ class UserSignUpService extends UserService
         $this->eventDispatcher->dispatch(UserSignUpEvent::getEventName(), (new UserSignUpEvent($user)));
 
         if ($isAutoLogin) {
-            $stageUserSession = $this->filterSessionSensitive($user);
-            $this->di->get('sessionBag')->multipleSet($stageUserSession);
+            $this->di->get('userIdentity')->loginUser($user);
         }
 
         return $user;
     }
 
     /**
-     * @param $password
+     * Generate user password and token
+     *
+     * @param string $password
      * @return array
      */
     private function generatePwdAndToken($password)

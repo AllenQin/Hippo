@@ -1,6 +1,7 @@
 <?php
 namespace App\Library\Core\Di;
 
+use App\Library\Core\Auth\UserIdentity;
 use App\Library\Core\Validators\Assert;
 use Monolog\Logger;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -12,6 +13,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  * @property Assert $assert
  * @property EventDispatcher eventDispatcher
  * @property Logger $logger
+ * @property UserIdentity $userIdentity
  *
  * @package App\Library\Core\Di
  */

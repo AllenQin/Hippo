@@ -17,7 +17,7 @@ class UserController extends Controller
             $user = $userSignInSrv->signIn($this->getPost());
 
             if ($user) {
-                return $this->redirect('/web/index/index');
+                return $this->redirect(['web', 'index', 'index']);
             } else {
                 $errorMsg = $this->assert->getErrorMessage();
             }

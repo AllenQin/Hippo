@@ -29,8 +29,7 @@ class UserSignInService extends UserService
             return false;
         }
 
-        $stageUserSession = $this->filterSessionSensitive($user);
-        $this->di->get('sessionBag')->multipleSet($stageUserSession);
+        $this->di->get('userIdentity')->loginUser($user);
 
         return $user;
     }

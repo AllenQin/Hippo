@@ -26,7 +26,7 @@ class HQueue
     public function enqueue($queue, $job, $arguments, $trackStatus = false)
     {
         if ($this->delay > 0) {
-            return $this->enqueueJobIn($this->delay, $queue, $job, $arguments);
+            $this->enqueueJobIn($this->delay, $queue, $job, $arguments);
         } else {
             return \Resque::enqueue($queue, $job, $arguments);
         }

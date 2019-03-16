@@ -6,11 +6,8 @@ class IndexController extends Controller
 {
     public function indexAction()
     {
-        if ($username = $this->di->get('sessionBag')->get('username')) {
-            $message = 'Hello, ' . $username;
-        } else {
-            $message = 'Hello, Hippo!';
-        }
+        $message = $this->userIdentity->isGuest ? 'Hello, Hippo'
+            : 'Hello, ' . $this->userIdentity->userData['username'];
 
         $this->display('index', ['content' => $message]);
     }

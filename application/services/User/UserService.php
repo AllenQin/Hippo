@@ -4,6 +4,7 @@ namespace App\Services\User;
 use App\Library\Core\Service\ServiceWrapper;
 use App\Model\Domains\Entity\User;
 use App\Model\Domains\Repositories\AbstractRepository;
+use App\Model\Domains\Repositories\User\UserRepository;
 
 /**
  * Class UserService
@@ -12,12 +13,15 @@ use App\Model\Domains\Repositories\AbstractRepository;
 class UserService extends ServiceWrapper
 {
     /**
-     * @var AbstractRepository
+     * Injection userRepository
+     *
+     * @var UserRepository AbstractRepository
      */
     protected $userRepository;
 
     /**
-     * UserService constructor.
+     * UserService constructor
+     *
      * @param AbstractRepository $userRepository
      */
     public function __construct(AbstractRepository $userRepository)
@@ -26,7 +30,9 @@ class UserService extends ServiceWrapper
     }
 
     /**
-     * @param $password
+     * Generate user password
+     *
+     * @param string $password
      * @param string $slat
      * @return bool|string
      */
@@ -36,8 +42,10 @@ class UserService extends ServiceWrapper
     }
 
     /**
-     * @param $password
-     * @param $hash
+     * Verity that the password is correct
+     *
+     * @param string $password
+     * @param string $hash
      * @return bool
      */
     protected function assertPassword($password, $hash)
@@ -46,6 +54,8 @@ class UserService extends ServiceWrapper
     }
 
     /**
+     * Generate user access token
+     *
      * @param int $length
      * @return string
      */
@@ -53,19 +63,5 @@ class UserService extends ServiceWrapper
     {
         // will generate a 128-bit string
         return bin2hex(openssl_random_pseudo_bytes($length));
-    }
-
-    /**
-     * @param User $user
-     * @return array
-     */
-    protected function filterSessionSensitive(User $user)
-    {
-        return [
-            'id' => $user->id,
-            'username' => $user->username,
-            'nickname' => $user->nickname,
-            'status' => (int)$user->status,
-        ];
     }
 }

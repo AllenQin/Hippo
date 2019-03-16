@@ -16,7 +16,7 @@ class ServerCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         echo '访问地址: http://localhost:8001' . PHP_EOL;
-        $shellResponse = exec('php -S localhost:8001 -t ' . APP_PATH . '/public');
+        exec('php -S localhost:8001 -t ' . APP_PATH . '/public');
         return true;
     }
 }

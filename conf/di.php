@@ -1,4 +1,5 @@
 <?php
+use App\Library\Core\Auth\UserIdentity;
 use App\Library\Core\Cache\Redis;
 use App\Library\Core\Encrypt\JWTService;
 use App\Library\Core\Log\LogWrapper;
@@ -49,5 +50,8 @@ return [
     },
     'userRepository' => function($c) {
         return new UserRepository(new User());
+    },
+    'userIdentity' => function($c) {
+        return new UserIdentity($c);
     }
 ];

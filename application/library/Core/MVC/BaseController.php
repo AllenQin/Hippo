@@ -8,6 +8,7 @@ use Yaf\Controller_Abstract;
 /**
  * Class BaseController
  *
+ *
  * @package App\Library\Core\MVC
  */
 class BaseController extends Controller_Abstract implements InjectionWareInterface
@@ -86,5 +87,18 @@ class BaseController extends Controller_Abstract implements InjectionWareInterfa
     public function request()
     {
         return $this->getRequest();
+    }
+
+    public function redirect($uri, $params = [])
+    {
+        if (is_array($uri)) {
+            $uri =  '/' . implode('/', $uri);
+        }
+
+        if ($params) {
+            $uri .= '?' . http_build_query($params);
+        }
+
+        return parent::redirect($uri);
     }
 }

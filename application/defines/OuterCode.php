@@ -4,7 +4,7 @@ namespace App\Defines;
 class OuterCode
 {
     const SUCCESS = 200;
-    const NOT_FIND = 404;
+    const NOT_FOUND = 404;
     const PERMISSION_DENIED = 403;
     const NEED_LOGIN = 1000;
     const PARAMETER_ERROR = 1001;

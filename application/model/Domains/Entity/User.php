@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Domains\Entity;
 
+use App\Library\Core\Auth\UserInterface;
 use App\Library\Core\MVC\EloquentModel;
 
 
@@ -18,7 +19,7 @@ use App\Library\Core\MVC\EloquentModel;
  *
  * @package App\Model
  */
-class User extends EloquentModel
+class User extends EloquentModel implements UserInterface
 {
     protected $table = 'users';
 
@@ -27,4 +28,25 @@ class User extends EloquentModel
 
     // other relation
     // this->belongsTo Or $this->belongsToMany
+
+    public function getUid()
+    {
+        return $this->id;
+    }
+
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    public function getUserData()
+    {
+        return [
+            'id' => $this->id,
+            'username' => $this->username,
+            'nickname' => $this->nickname,
+            'status' => (int)$this->status,
+        ];
+    }
+
 }
