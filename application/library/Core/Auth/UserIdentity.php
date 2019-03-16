@@ -1,6 +1,7 @@
 <?php
 namespace App\Library\Core\Auth;
 
+use App\Library\Core\Cookie\CookieService;
 use Pimple\Container;
 use App\Library\Core\Log\LogWrapper;
 use App\Library\Core\Session\SessionBag;
@@ -32,6 +33,16 @@ class UserIdentity
     /* @var SessionBag $sessionBag */
     private $sessionBag;
 
+    /** @var  CookieService $cookie */
+    private $cookie;
+
+    /**
+     * Cookie id
+     *
+     * @var string
+     */
+    private $authId;
+
     /**
      * UserIdentity constructor.
      *
@@ -41,8 +52,10 @@ class UserIdentity
     {
         $this->logger = $container['logger'];
         $this->sessionBag = $container['sessionBag'];
-        $this->userData = $this->getUserData();
+        $this->cookie = $container['cookieSrv'];
+        $this->authId = md5($container['config']['auth']['id']);
 
+        $this->userData = $this->getUserData();
         $this->isGuest = $this->userData ? false : true;
     }
 
@@ -75,7 +88,7 @@ class UserIdentity
      */
     public function logoutUser()
     {
-        return $this->sessionBag->destroy();
+        return $this->sessionBag->destroy() && $this->cookie->delete($this->authId);
     }
 
     /**
