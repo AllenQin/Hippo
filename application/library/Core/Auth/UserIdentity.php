@@ -75,7 +75,7 @@ class UserIdentity
      */
     public function logoutUser()
     {
-        return $this->sessionBag->delete('authIdentityValue');
+        return $this->sessionBag->destroy();
     }
 
     /**
