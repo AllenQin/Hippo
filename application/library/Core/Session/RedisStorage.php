@@ -125,6 +125,6 @@ class RedisStorage implements StorageInterface
      */
     public function getSessionId()
     {
-        $this->uniqueId;
+        return $this->uniqueId;
     }
 }
