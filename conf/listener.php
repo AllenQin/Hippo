@@ -14,10 +14,10 @@
  *  ],
  */
 use App\Model\Events\User\UserSignUpEvent;
-use App\Model\Listen\User\SignUpListen;
+use App\Model\Listeners\User\SignUpListen;
 
 return [
-    'user.SingUp' => [
+    'userSingUp' => [
         function(UserSignUpEvent $event) {
             return (new SignUpListen())->onSignUp($event);
         },

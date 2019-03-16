@@ -73,7 +73,7 @@ class UserIdentity
      *
      * @return mixed
      */
-    public function LogoutUser()
+    public function logoutUser()
     {
         return $this->sessionBag->delete('authIdentityValue');
     }

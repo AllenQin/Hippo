@@ -51,7 +51,7 @@ class UserController extends Controller
      */
     public function logOutAction()
     {
-        $this->di->get('sessionBag')->destroy();
+        $this->userIdentity->logoutUser();
         return $this->redirect('/web/index/index');
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace App\Model\Listen\User;
+namespace App\Model\Listeners\User;
 
 use App\Library\Core\Event\Listener;
 use App\Model\Events\User\UserSignUpEvent;
