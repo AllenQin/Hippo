@@ -1,6 +1,8 @@
 <?php
 use App\Library\Core\Auth\UserIdentity;
 use App\Library\Core\Cache\Redis;
+use App\Library\Core\Email\Mail;
+use App\Library\Core\Email\PHPMailerClient;
 use App\Library\Core\Encrypt\JWTService;
 use App\Library\Core\Log\LogWrapper;
 use App\Library\Core\Queue\HQueue;
@@ -53,5 +55,9 @@ return [
     },
     'userIdentity' => function($c) {
         return new UserIdentity($c);
-    }
+    },
+    'mailSrv' => function($c) {
+        // customer send Email class
+        return new Mail(new PHPMailerClient($c['config']['mail']));
+    },
 ];
