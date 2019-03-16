@@ -28,8 +28,8 @@ class RedisStorage implements StorageInterface
             $this->uniqueId = $jwtDecode->val;
         } else {
             // @todo use global unique service
-            if (function_exists('create_session_id')) {
-                $this->uniqueId = create_session_id();
+            if (function_exists('session_create_id')) {
+                $this->uniqueId = session_create_id();
             } else {
                 $this->uniqueId = md5(uniqid(microtime(true), true));
             }
