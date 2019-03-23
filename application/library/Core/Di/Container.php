@@ -140,6 +140,22 @@ class Container implements ContainerInterface, \ArrayAccess
 
         return static::$default;
     }
+
+    /**
+     * Get Or instance a service
+     *
+     * @param $name
+     * @param $callback
+     * @return mixed
+     */
+    public function getOrInstance($name, $callback)
+    {
+        if (!$this->offsetExists($name)) {
+            $this->set($name, $callback);
+        }
+
+        return $this->get($name);
+    }
 }
 
 

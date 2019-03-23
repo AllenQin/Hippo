@@ -9,7 +9,7 @@ class IndexController extends Controller
         $message = $this->userIdentity->isGuest ? 'Hello, Hippo'
             : 'Hello, ' . $this->userIdentity->userData['username'];
 
-        $this->display('index', ['content' => $message]);
+        return $this->display('index', ['content' => $message]);
     }
 
     /**
@@ -17,6 +17,6 @@ class IndexController extends Controller
      */
     public function showAction()
     {
-
+        return $this->display('show', ['editForm' => '']);
     }
 }

@@ -1,8 +1,7 @@
-#About Hippo
-Hippo is PHP simple framework, it is base on yaf php extend.
+###About Hippo   
+Hippo is a simple framework, it is base on yaf php extend.
 
-
-#Install
+###Install
 ```shell
 git clone git@github.com:AllenQin/Hippo.git
 
@@ -11,5 +10,5 @@ cd Hippo
 composer install
 ```
 
-#Required
+###Required
 install yaf

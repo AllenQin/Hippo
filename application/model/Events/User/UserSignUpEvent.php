@@ -10,7 +10,7 @@ class UserSignUpEvent extends Event implements IEvent
 
     public static function getEventName()
     {
-        return 'user.SingUp';
+        return 'userSingUp';
     }
 
     public function __construct(User $user)

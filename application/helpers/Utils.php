@@ -20,14 +20,11 @@ class Utils
      */
     public static function removeXss($string)
     {
-        if (!Registry::get('di')->offsetExists('antiXSS')) {
-            Registry::get('di')->set('antiXSS', function(){
-                return new AntiXSS();
-            });
-        }
+        /** @var AntiXSS $antiXss */
+        $antiXss = Registry::get('di')->getOrInstance('antiXss', function($c){
+            return new AntiXSS();
+        });
 
-        /** @var AntiXSS $antiXSS */
-        $antiXSS = Registry::get('di')->get('antiXSS');
-        return $antiXSS->xss_clean($string);
+        return $antiXss->xss_clean($string);
     }
 }

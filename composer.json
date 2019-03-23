@@ -44,6 +44,7 @@
             "App\\Defines\\": "application/defines/",
             "App\\Library\\Core\\": "application/library/Core/",
             "App\\Model\\":"application/model/",
+            "App\\Moduels\\":"application/modules/",
             "Command\\":"application/command/",
             "Db\\Types\\":"db/types/"
         }

@@ -64,7 +64,7 @@ class UserIdentity
      *
      * @param UserInterface $user
      * @param int $expired
-     * @return $this|bool
+     * @return mixed
      */
     public function loginUser(UserInterface $user, $expired = 86400)
     {
