@@ -30,6 +30,8 @@ abstract class AbstractRepository
     }
 
     /**
+     * Find a single entity object by pk
+     *
      * @param $id
      * @param array $columns
      * @return mixed
@@ -40,6 +42,8 @@ abstract class AbstractRepository
     }
 
     /**
+     * Find a single entity object by condition
+     *
      * @param $attribute
      * @param $value
      * @param array $columns
@@ -53,6 +57,8 @@ abstract class AbstractRepository
     }
 
     /**
+     * Get quantity by query condition
+     *
      * @param $attribute
      * @param $value
      * @return mixed
@@ -65,15 +71,20 @@ abstract class AbstractRepository
     }
 
     /**
+     * Query a single entity, if it does not exists, create a new one and return
+     *
      * @param array $data
+     * @param array $values
      * @return mixed
      */
-    public function firstOrCreate(array $data)
+    public function firstOrCreate(array $data, $values = [])
     {
-        return $this->model->firstOrCreate($data);
+        return $this->model->firstOrCreate($data, $values);
     }
 
     /**
+     * Get all record
+     *
      * @param array $columns
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -83,6 +94,8 @@ abstract class AbstractRepository
     }
 
     /**
+     * Query record by pagination
+     *
      * @param int $perPage
      * @param array $columns
      * @return mixed
@@ -93,6 +106,8 @@ abstract class AbstractRepository
     }
 
     /**
+     * Filling a entity and return, but don't save the database
+     *
      * @param array $data
      * @return mixed
      */
@@ -102,6 +117,8 @@ abstract class AbstractRepository
     }
 
     /**
+     * Return a new entity and save the database
+     *
      * @param array $data
      * @return mixed
      */
@@ -111,6 +128,8 @@ abstract class AbstractRepository
     }
 
     /**
+     * Update a entity
+     *
      * @param array $data
      * @param $id
      * @param string $attribute
@@ -124,6 +143,8 @@ abstract class AbstractRepository
     }
 
     /**
+     * Delete a entity
+     *
      * @param $id
      * @return mixed
      */
