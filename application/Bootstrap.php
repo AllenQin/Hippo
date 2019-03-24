@@ -69,6 +69,7 @@ class Bootstrap extends Bootstrap_Abstract
 
         $capsule->bootEloquent();
         Registry::get('di')->set('db', $capsule);
+        Registry::set('db', $capsule);
         class_alias('\Illuminate\Database\Capsule\Manager', 'DB');
     }
 

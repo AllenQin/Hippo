@@ -10,7 +10,6 @@ use Doctrine\DBAL\Types\Type;
 use Doctrine\Migrations\Configuration\Configuration;
 use Doctrine\Migrations\Tools\Console\ConsoleRunner;
 use Doctrine\Migrations\Tools\Console\Helper\ConfigurationHelper;
-use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Helper\QuestionHelper;

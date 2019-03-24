@@ -17,10 +17,10 @@ $app_list = [];
 
 foreach (glob($commandPath.'/*Command.php') as $row){
     $class = sprintf('Command\\%s', basename($row, '.php'));
-    $object = new ReflectionClass($class);
-    $app_list[] = $object->newInstance();
+    $object = new \ReflectionClass($class);
+    $appList[] = $object->newInstance();
 }
 
-$application->addCommands($app_list);
+$application->addCommands($appList);
 $application->setAutoExit(false);
 $application->run();
