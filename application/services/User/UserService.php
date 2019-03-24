@@ -30,7 +30,8 @@ class UserService extends ServiceWrapper
     }
 
     /**
-     * Generate user password
+     * Generate user hash password
+     * return a 64-bit string
      *
      * @param string $password
      * @param string $slat

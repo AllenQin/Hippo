@@ -48,7 +48,7 @@ class UserSignUpService extends UserService
             return false;
         }
 
-        $data = array_merge($data, $this->generatePwdAndToken($data['password']));
+        $data = array_merge($data, $this->generateHashPwdAndToken($data['password']));
         if (!$user = $this->userRepository->create($data)) {
             // @todo throw new Exception
 
@@ -65,12 +65,12 @@ class UserSignUpService extends UserService
     }
 
     /**
-     * Generate user password and token
+     * Generate user hash password and token
      *
      * @param string $password
      * @return array
      */
-    private function generatePwdAndToken($password)
+    private function generateHashPwdAndToken($password)
     {
         return [
             'password' => $this->generatePassword($password),
