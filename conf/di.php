@@ -1,4 +1,5 @@
 <?php
+use Adbar\Dot;
 use App\Library\Core\Auth\UserIdentity;
 use App\Library\Core\Cache\Redis;
 use App\Library\Core\Email\Mail;
@@ -18,7 +19,7 @@ use App\Model\Domains\Repositories\User\UserRepository;
 
 return [
     'config' => function($c) {
-        return Registry::get('config');
+        return new Dot(Registry::get('config'));
     },
     'cache' => function($c) {
         return new Redis($c['config']['redis']);

@@ -79,7 +79,6 @@ class Bootstrap extends Bootstrap_Abstract
     {
         $listenerFilePath = APP_PATH . '/conf/listener.php';
         if (file_exists($listenerFilePath) && $listener = require($listenerFilePath)) {
-            /* @var EventDispatcher $eventDispatcher */
             $eventDispatcher = Registry::get('di')->get('eventDispatcher');
             foreach ($listener as $eventName => $value) {
                 if (is_array($value)) {
