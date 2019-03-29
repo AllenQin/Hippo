@@ -1,8 +1,8 @@
 <?php
 
 use App\Library\Core\Di\Container;
+use App\Library\Core\Router\Router;
 use Illuminate\Database\Capsule\Manager;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
 use Yaf\Application;
@@ -38,7 +38,7 @@ class Bootstrap extends Bootstrap_Abstract
     }
 
     /**
-     * 初始化开发环境开启调试错误处理
+     * develop debug
      */
     public function _initDebug()
     {
@@ -100,9 +100,13 @@ class Bootstrap extends Bootstrap_Abstract
      */
     public function _initRouter(Dispatcher $dispatcher)
     {
-        if (file_exists(APP_PATH . '/conf/router.php') && $routerContent = require(APP_PATH . '/conf/router.php')) {
-            $router = $dispatcher->getRouter();
-            $router->addConfig($routerContent);
+        $routerConfig = APP_PATH . '/conf/router.php';
+        if (file_exists($routerConfig) && $routerMap = require $routerConfig) {
+            if (is_object($routerMap) && $routerMap instanceof Router) {
+                $dispatcher->getRouter()->addConfig($routerMap());
+            } else if(is_array($routerMap)) {
+                $dispatcher->getRouter()->addConfig($routerMap);
+            }
         }
     }
 
@@ -115,6 +119,8 @@ class Bootstrap extends Bootstrap_Abstract
     {
         $plugins = [
             new RequestPlugin(),
+            new RouterPlugin(),
+            new MiddleWarePlugin(),
         ];
 
         foreach ($plugins as $plugin) {

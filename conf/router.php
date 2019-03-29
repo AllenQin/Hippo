@@ -1,20 +1,7 @@
 <?php
 
-$defaultModule = 'Web';
-$defaultController = 'Index';
-$defaultAction = 'Index';
+use App\Library\Core\Router\Router;
 
-return [
-    // 修改访问默认模块
-    'default' => [
-        'type' => 'regex',
-        'match' => '#^/$#',
-        'route' => [
-            'module' => $defaultModule,
-            'controller' => $defaultController,
-            'action' => $defaultAction
-        ],
-    ],
+Router::add('userLogin', 'login', 'user@signIn');
 
-    // 其他自定义路由
-];
+return new Router();

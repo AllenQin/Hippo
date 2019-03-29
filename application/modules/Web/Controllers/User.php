@@ -17,7 +17,7 @@ class UserController extends Controller
             $user = $userSignInSrv->signIn($this->getPost());
 
             if ($user) {
-                return $this->redirect(['web', 'index', 'index']);
+                return $this->redirect(['index', 'index']);
             } else {
                 $errorMsg = $this->assert->getErrorMessage();
             }
@@ -37,7 +37,7 @@ class UserController extends Controller
             $user = $userSignUpSrv->signUp($this->getPost(), true);
 
             if ($user) {
-                return $this->redirect('/web/index/index');
+                return $this->redirect('/index/index');
             } else {
                 $errorMsg = $this->assert->getErrorMessage();
             }
@@ -52,6 +52,6 @@ class UserController extends Controller
     public function logOutAction()
     {
         $this->userIdentity->logoutUser();
-        return $this->redirect('/web/index/index');
+        return $this->redirect('/index/index');
     }
 }
