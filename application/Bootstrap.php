@@ -58,6 +58,41 @@ class Bootstrap extends Bootstrap_Abstract
     }
 
     /**
+     * 初始化自定义路由
+     *
+     * @param Dispatcher $dispatcher
+     */
+    public function _initRouter(Dispatcher $dispatcher)
+    {
+        $routerConfig = APP_PATH . '/conf/router.php';
+        if (file_exists($routerConfig) && $routerMap = require $routerConfig) {
+            if (is_object($routerMap) && $routerMap instanceof Router) {
+                $dispatcher->getRouter()->addConfig($routerMap());
+            } else if(is_array($routerMap)) {
+                $dispatcher->getRouter()->addConfig($routerMap);
+            }
+        }
+    }
+
+    /**
+     * 初始化自定义插件
+     *
+     * @param Dispatcher $dispatcher
+     */
+    public function _initPlugin(Dispatcher $dispatcher)
+    {
+        $plugins = [
+            new RequestPlugin(),
+            new RouterPlugin(),
+            new MiddleWarePlugin(),
+        ];
+
+        foreach ($plugins as $plugin) {
+            $dispatcher->registerPlugin($plugin);
+        }
+    }
+
+    /**
      * 初始化数据库连接
      */
     public function _initDefaultDbAdapter()
@@ -90,41 +125,6 @@ class Bootstrap extends Bootstrap_Abstract
                     $eventDispatcher->addListener($eventName, $value);
                 }
             }
-        }
-    }
-
-    /**
-     * 初始化自定义路由
-     *
-     * @param Dispatcher $dispatcher
-     */
-    public function _initRouter(Dispatcher $dispatcher)
-    {
-        $routerConfig = APP_PATH . '/conf/router.php';
-        if (file_exists($routerConfig) && $routerMap = require $routerConfig) {
-            if (is_object($routerMap) && $routerMap instanceof Router) {
-                $dispatcher->getRouter()->addConfig($routerMap());
-            } else if(is_array($routerMap)) {
-                $dispatcher->getRouter()->addConfig($routerMap);
-            }
-        }
-    }
-
-    /**
-     * 初始化自定义插件
-     *
-     * @param Dispatcher $dispatcher
-     */
-    public function _initPlugin(Dispatcher $dispatcher)
-    {
-        $plugins = [
-            new RequestPlugin(),
-            new RouterPlugin(),
-            new MiddleWarePlugin(),
-        ];
-
-        foreach ($plugins as $plugin) {
-            $dispatcher->registerPlugin($plugin);
         }
     }
 

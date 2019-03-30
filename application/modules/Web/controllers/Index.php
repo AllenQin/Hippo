@@ -1,6 +1,8 @@
 <?php
 
 use App\Library\Core\MVC\Controller;
+use App\Model\Domains\Entity\Article;
+use App\Model\Domains\Repositories\Article\ArticleRepository;
 
 class IndexController extends Controller
 {
@@ -18,5 +20,15 @@ class IndexController extends Controller
     public function showAction()
     {
         return $this->display('show', ['editForm' => '']);
+    }
+
+    public function checkAuthAction()
+    {
+        $articleRep = new ArticleRepository(new Article());
+        $article = $articleRep->find(1);
+
+        $checkResult = $this->di->get('auth')->can('update', $article);
+        var_dump($checkResult);
+        die();
     }
 }

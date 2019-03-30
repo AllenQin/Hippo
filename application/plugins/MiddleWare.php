@@ -38,9 +38,11 @@ class MiddleWarePlugin extends Plugin_Abstract
     private function filterMiddleWare($middleWareClasses, Request_Abstract $request, Response_Abstract $response)
     {
         $middleWareClasses = array_change_key_case($middleWareClasses, CASE_LOWER);
-        $moduleName = strtolower($request->getModuleName());
-        $controllerName = strtolower($request->getControllerName());
-        $actionName = strtolower($request->getActionName());
+        list($moduleName, $controllerName, $actionName) = array_map('strtolower', [
+            $request->getModuleName(),
+            $request->getControllerName(),
+            $request->getActionName()
+        ]);
 
         $commonMiddleWare = isset($middleWareClasses['common']) ? $middleWareClasses['common'] : [];
         $moduleMiddleWare = isset($middleWareClasses[$moduleName]) ? $middleWareClasses[$moduleName] : [];
@@ -48,6 +50,12 @@ class MiddleWarePlugin extends Plugin_Abstract
         $uriName = $moduleName . '@' . $controllerName . '@' . $actionName;
         $uriMiddleWare = isset($middleWareClasses[$uriName]) ? $middleWareClasses[$uriName] : [];
 
-        return array_merge($commonMiddleWare, $moduleMiddleWare, $uriMiddleWare);
+        // Asterisk Wildcard
+        $wildcardUri = $moduleName . '@' . $controllerName . '@*';
+        if (isset($middleWareClasses[$wildcardUri]) && $middleWareClasses) {
+            $uriMiddleWare = array_merge($uriMiddleWare, $middleWareClasses[$wildcardUri]);
+        }
+
+        return array_unique(array_merge($commonMiddleWare, $moduleMiddleWare, $uriMiddleWare));
     }
 }

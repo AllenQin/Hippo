@@ -1,5 +1,6 @@
 <?php
 use Adbar\Dot;
+use App\Library\Core\Auth\PolicyService;
 use App\Library\Core\Auth\UserIdentity;
 use App\Library\Core\Cache\Redis;
 use App\Library\Core\Email\Mail;
@@ -60,5 +61,21 @@ return [
     'mailSrv' => function($c) {
         // customer send Email class
         return new Mail(new PHPMailerClient($c['config']['mail']));
+    },
+    'auth' => function($c) {
+        $userData = $c['userIdentity']->userData;
+        if (!$user = $c['userRepository']->find($userData['id'])) {
+            $user = new User();
+        }
+
+        return new App\Library\Core\Auth\Auth($user);
+    },
+    'policy' => function($c) {
+        $policyFilePath = APP_PATH . '/conf/policy.php';
+        if (!file_exists($policyFilePath) || !$policies = require($policyFilePath)) {
+            $policies = [];
+        }
+
+        return new PolicyService($policies);
     },
 ];
