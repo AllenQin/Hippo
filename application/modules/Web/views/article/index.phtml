@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>Post Info</title>
+</head>
+<body>
+<style>
+    .content{width:100%;min-height: 400px;text-align: center;line-height: 400px;font-size:62px;font-family: 'Menlo', 'Monaco', monospace}
+</style>
+<?php
+    foreach ($articles as $article):
+?>
+        <p>
+            <a href="/article/show/<?=$article['id'];?>"> <?=$article['title'];?> </a>
+            <i>-<?=$article['author']?></i>
+            <i>-<?=$article['created_at']?></i>
+        </p>
+<?php
+    endforeach;
+?>
+</body>
+</html>

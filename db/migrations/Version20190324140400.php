@@ -43,7 +43,7 @@ final class Version20190324140400 extends AbstractMigration
             ->setLength(1)
             ->setNotnull(true)
             ->setDefault(0)
-            ->setComment('user status 0:inactivated 1:activated 2:freeze');
+            ->setComment('article status 0:pending 1:publish 2:deleted');
 
         $table->addColumn('created_at', 'integer')
             ->setUnsigned(true)

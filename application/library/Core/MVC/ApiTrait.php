@@ -10,6 +10,7 @@ Trait ApiTrait
      * @param $data
      */
     public function success($data = []) {
+        header('Content-type:text/json;charset=utf-8');
         echo json_encode([
             'code' => OuterCode::SUCCESS,
             'data' => $data,
@@ -26,6 +27,7 @@ Trait ApiTrait
      */
     public function error($errorCode, $errorMsg)
     {
+        header('Content-type:text/json;charset=utf-8');
         echo json_encode([
             'code' => $errorCode,
             'data' => [],
