@@ -1,6 +1,7 @@
 <?php
 namespace App\Library\Core\Di;
 
+use App\Library\Core\Auth\Auth;
 use App\Library\Core\Auth\UserIdentity;
 use App\Library\Core\Validators\Assert;
 use Monolog\Logger;
@@ -14,6 +15,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  * @property EventDispatcher eventDispatcher
  * @property Logger $logger
  * @property UserIdentity $userIdentity
+ * @property Auth $auth
  *
  * @package App\Library\Core\Di
  */

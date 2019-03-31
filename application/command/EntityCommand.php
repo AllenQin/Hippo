@@ -1,22 +1,14 @@
 <?php
 namespace Command;
 
-use Nette\PhpGenerator\ClassType;
-use Nette\PhpGenerator\PhpNamespace;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Yaf\Registry;
 
-class EntityCommand extends Command
+class EntityCommand extends BaseMakeFile
 {
-    /** @var PhpNamespace $namespace **/
-    private $namespace;
-
-    /** @var ClassType $class **/
-    private $class;
+    protected $path = APP_PATH . '/application/model/Domains/Entity/';
 
     protected function configure()
     {
@@ -87,7 +79,7 @@ class EntityCommand extends Command
         if ($isDryRun) {
             $output->writeln($this->getContent());
         } else {
-            if($this->createFile($className, $input, $output)) {
+            if($this->createFile($className . '.php', $input, $output)) {
                 $output->writeln('create success');
             } else {
                 $output->writeln('no change');
@@ -95,29 +87,6 @@ class EntityCommand extends Command
         }
 
         return true;
-    }
-
-    private function initNamespace($namespace)
-    {
-        $this->namespace = new PhpNamespace($namespace);
-    }
-
-    private function addUse($fullClass)
-    {
-        $this->namespace->addUse($fullClass);
-    }
-
-    private function addClass($name)
-    {
-        $this->class = $this->namespace->addClass($name);
-        $this->class->addComment('Class ' . $name);
-        $this->class->addComment('');
-    }
-
-    private function setExtend($parentClass)
-    {
-        $this->class->addExtend($parentClass);
-        $this->addUse($parentClass);
     }
 
     private function addImplement($implementClass)
@@ -137,33 +106,5 @@ class EntityCommand extends Command
         }
 
         return $field;
-    }
-
-    private function getContent()
-    {
-        return $this->namespace;
-    }
-
-    private function createFile($name, InputInterface $input, OutputInterface $output)
-    {
-        $fullPath = APP_PATH . '/application/model/Domains/Entity/' . $name . '.php';
-        if (file_exists($fullPath)) {
-            $confirmMsg = '<question>The file ' . $name . '.php is exists, Are you sure want to rewrite it?</question>(y/N)';
-            $question = new ConfirmationQuestion($confirmMsg, false);
-            $question->setMaxAttempts(2);
-            $helper = $this->getHelper('question');
-
-            if (!$helper->ask($input, $output, $question)) {
-                return false;
-            }
-        }
-
-        $fileObject = fopen($fullPath, "w");
-        fwrite($fileObject, "<?php");
-        fwrite($fileObject, "\n");
-        fwrite($fileObject, $this->getContent());
-        fclose($fileObject);
-
-        return true;
     }
 }

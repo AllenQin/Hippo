@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Domains\Entity;
 
 use App\Library\Core\MVC\EloquentModel;

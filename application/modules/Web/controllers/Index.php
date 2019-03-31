@@ -27,8 +27,6 @@ class IndexController extends Controller
         $articleRep = new ArticleRepository(new Article());
         $article = $articleRep->find(1);
 
-        $checkResult = $this->di->get('auth')->can('update', $article);
-        var_dump($checkResult);
-        die();
+        $this->auth->can('update', $article);
     }
 }

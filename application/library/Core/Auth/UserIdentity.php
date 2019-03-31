@@ -21,6 +21,13 @@ class UserIdentity
     public $isGuest;
 
     /**
+     * Login user unique ID
+     *
+     * @var integer
+     */
+    private $id;
+
+    /**
      * Login user stage data
      *
      * @var array|mixed
@@ -56,7 +63,12 @@ class UserIdentity
         $this->authId = md5($container['config']['auth']['id']);
 
         $this->userData = $this->getUserData();
+        if ($this->userData && !isset($this->userData['id'])) {
+            throw new \Exception('UserIdentity property userData must contain id field!');
+        }
+
         $this->isGuest = $this->userData ? false : true;
+        $this->id = !$this->isGuest ? $this->userData['id'] : 0;
     }
 
     /**
@@ -89,6 +101,16 @@ class UserIdentity
     public function logoutUser()
     {
         return $this->sessionBag->destroy() && $this->cookie->delete($this->authId);
+    }
+
+    /**
+     * Get Login user ID
+     *
+     * @return int|mixed
+     */
+    public function getUid()
+    {
+        return $this->id;
     }
 
     /**

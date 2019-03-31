@@ -63,19 +63,15 @@ return [
         return new Mail(new PHPMailerClient($c['config']['mail']));
     },
     'auth' => function($c) {
-        $userData = $c['userIdentity']->userData;
-        if (!$user = $c['userRepository']->find($userData['id'])) {
-            $user = new User();
-        }
-
-        return new App\Library\Core\Auth\Auth($user);
+        return new App\Library\Core\Auth\Auth($c, null);
     },
+    /*
     'policy' => function($c) {
         $policyFilePath = APP_PATH . '/conf/policy.php';
         if (!file_exists($policyFilePath) || !$policies = require($policyFilePath)) {
             $policies = [];
         }
-
         return new PolicyService($policies);
     },
+    */
 ];
