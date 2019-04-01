@@ -13,6 +13,8 @@ class OnlyGuest extends ServiceWrapper implements MiddleWareInterface
         if (!$this->userIdentity->isGuest) {
             Utils::redirect('/');
         }
+
+        return $request;
     }
 
 }

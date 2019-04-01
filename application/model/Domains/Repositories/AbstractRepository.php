@@ -20,16 +20,6 @@ abstract class AbstractRepository
     protected $modelName;
 
     /**
-     * AbstractRepository constructor.
-     * @param EloquentModel $model
-     */
-    public function __construct(EloquentModel $model)
-    {
-        $this->model = $model;
-        $this->modelName  = get_class($this->model);
-    }
-
-    /**
      * Find a single entity object by pk
      *
      * @param $id

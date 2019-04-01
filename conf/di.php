@@ -11,7 +11,10 @@ use App\Library\Core\Queue\HQueue;
 use App\Library\Core\Session\RedisStorage;
 use App\Library\Core\Session\SessionBag;
 use App\Library\Core\Validators\Assert;
+use App\Library\Core\Verify\VerifyCsrfToken;
 use App\Model\Domains\Entity\User;
+use App\Services\User\UserSignInService;
+use App\Services\User\UserSignUpService;
 use GuzzleHttp\Client;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Yaf\Registry;
@@ -53,7 +56,7 @@ return [
         return new JWTService($c);
     },
     'userRepository' => function($c) {
-        return new UserRepository(new User());
+        return new UserRepository();
     },
     'userIdentity' => function($c) {
         return new UserIdentity($c);
@@ -63,15 +66,15 @@ return [
         return new Mail(new PHPMailerClient($c['config']['mail']));
     },
     'auth' => function($c) {
-        return new App\Library\Core\Auth\Auth($c, null);
+        return new App\Library\Core\Auth\Auth($c);
     },
-    /*
-    'policy' => function($c) {
-        $policyFilePath = APP_PATH . '/conf/policy.php';
-        if (!file_exists($policyFilePath) || !$policies = require($policyFilePath)) {
-            $policies = [];
-        }
-        return new PolicyService($policies);
+    'userSignInSrv' => function($c) {
+        return new UserSignInService($c['userRepository']);
     },
-    */
+    'userSignUpSrv' => function($c) {
+        return new UserSignUpService($c['userRepository']);
+    },
+    'verifyCsrfToken' => function($c) {
+        return new VerifyCsrfToken($c);
+    },
 ];

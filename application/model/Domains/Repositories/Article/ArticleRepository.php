@@ -2,12 +2,19 @@
 namespace App\Model\Domains\Repositories\Article;
 
 use App\Defines\Article;
+use App\Model\Domains\Entity\Article as ArticleEntity;
 use App\Model\Domains\Repositories\AbstractRepository;
 
 class ArticleRepository extends AbstractRepository
 {
+    public function __construct()
+    {
+        $this->model = new ArticleEntity();
+        $this->modelName  = ArticleEntity::class;
+    }
+
     /**
-     * Find pending article
+     * Query articles to be published
      *
      * @param $offset
      * @param $limit

@@ -14,9 +14,4 @@ class EloquentModel extends Model
 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
-
-    protected function asDateTime($value)
-    {
-        return $value;
-    }
 }

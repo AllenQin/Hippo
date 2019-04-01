@@ -5,17 +5,20 @@ use App\Model\Domains\Entity\Article;
 use App\Model\Domains\Repositories\Article\ArticleRepository;
 use App\Model\Transformers\Article\ArticleHomeTransformer;
 
+/**
+ * Class ArticleController
+ *
+ * @property ArticleRepository $articleRepository
+ * @property ArticleHomeTransformer $articleTransformer
+ */
 class ArticleController extends Controller
 {
-    /** @var ArticleRepository $articleRepository **/
     private $articleRepository;
-
-    /** @var ArticleHomeTransformer $articleTransformer **/
     private $articleTransformer;
 
     public function init()
     {
-        $this->articleRepository = new ArticleRepository(new Article());
+        $this->articleRepository = new ArticleRepository();
         $this->articleTransformer = new ArticleHomeTransformer();
 
         parent::init();

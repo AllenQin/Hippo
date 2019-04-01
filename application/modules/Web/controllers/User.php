@@ -1,9 +1,17 @@
 <?php
 
+use App\Library\Core\Auth\UserIdentity;
 use App\Library\Core\MVC\Controller;
 use App\Services\User\UserSignInService;
 use App\Services\User\UserSignUpService;
 
+/**
+ * Class UserController
+ *
+ * @property UserSignInService $userSignInSrv
+ * @property UserSignUpService $userSignUpSrv
+ * @property UserIdentity $userIdentity
+ */
 class UserController extends Controller
 {
     /**
@@ -13,9 +21,7 @@ class UserController extends Controller
     {
         $errorMsg = [];
         if ($this->isPost()) {
-            $userSignInSrv = new UserSignInService($this->di->get('userRepository'));
-            $user = $userSignInSrv->signIn($this->getPost());
-
+            $user = $this->userSignInSrv->signIn($this->getPost());
             if ($user) {
                 return $this->redirect(['index', 'index']);
             } else {
@@ -23,7 +29,10 @@ class UserController extends Controller
             }
         }
 
-        $this->display('signIn', ['errorMsg' => $errorMsg]);
+        $this->display('signIn', [
+            'errorMsg' => $errorMsg,
+            'token' => $this->di->get('verifyCsrfToken')->createToken(),
+        ]);
     }
 
     /**
@@ -33,9 +42,7 @@ class UserController extends Controller
     {
         $errorMsg = [];
         if ($this->isPost()) {
-            $userSignUpSrv = new UserSignUpService($this->di->get('userRepository'));
-            $user = $userSignUpSrv->signUp($this->getPost(), true);
-
+            $user = $this->userSignUpSrv->signUp($this->getPost(), true);
             if ($user) {
                 return $this->redirect('/index/index');
             } else {
@@ -43,7 +50,10 @@ class UserController extends Controller
             }
         }
 
-        $this->display('signUp', ['errorMsg' => $errorMsg]);
+        $this->display('signUp', [
+            'errorMsg' => $errorMsg,
+            'token' => $this->di->get('verifyCsrfToken')->createToken(),
+        ]);
     }
 
     /**

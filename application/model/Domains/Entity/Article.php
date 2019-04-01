@@ -3,8 +3,6 @@
 namespace App\Model\Domains\Entity;
 
 use App\Library\Core\MVC\EloquentModel;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Article
@@ -17,7 +15,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer updated_at
  * @property User $user
  *
- * @method
  */
 class Article extends EloquentModel
 {

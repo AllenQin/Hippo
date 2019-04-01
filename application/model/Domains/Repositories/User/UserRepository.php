@@ -2,6 +2,7 @@
 namespace App\Model\Domains\Repositories\User;
 
 use App\Defines\User;
+use App\Model\Domains\Entity\User as UserEntity;
 use App\Model\Domains\Repositories\AbstractRepository;
 
 /**
@@ -11,6 +12,12 @@ use App\Model\Domains\Repositories\AbstractRepository;
  */
 class UserRepository extends AbstractRepository
 {
+    public function __construct()
+    {
+        $this->model = new UserEntity();
+        $this->modelName = UserEntity::class;
+    }
+
     /**
      * @return mixed
      */
