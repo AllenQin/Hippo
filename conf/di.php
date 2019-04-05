@@ -8,11 +8,13 @@ use App\Library\Core\Email\PHPMailerClient;
 use App\Library\Core\Encrypt\JWTService;
 use App\Library\Core\Log\LogWrapper;
 use App\Library\Core\Queue\HQueue;
+use App\Library\Core\Request\RequestService;
 use App\Library\Core\Session\RedisStorage;
 use App\Library\Core\Session\SessionBag;
 use App\Library\Core\Validators\Assert;
 use App\Library\Core\Verify\VerifyCsrfToken;
 use App\Model\Domains\Entity\User;
+use App\Services\User\UserLogoutService;
 use App\Services\User\UserSignInService;
 use App\Services\User\UserSignUpService;
 use GuzzleHttp\Client;
@@ -74,7 +76,13 @@ return [
     'userSignUpSrv' => function($c) {
         return new UserSignUpService($c['userRepository']);
     },
+    'userLogoutSrv' => function($c) {
+        return new UserLogoutService($c['userRepository']);
+    },
     'verifyCsrfToken' => function($c) {
         return new VerifyCsrfToken($c);
+    },
+    'request' => function($c) {
+        return new RequestService($c);
     },
 ];

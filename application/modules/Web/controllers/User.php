@@ -2,6 +2,7 @@
 
 use App\Library\Core\Auth\UserIdentity;
 use App\Library\Core\MVC\Controller;
+use App\Services\User\UserLogoutService;
 use App\Services\User\UserSignInService;
 use App\Services\User\UserSignUpService;
 
@@ -10,6 +11,8 @@ use App\Services\User\UserSignUpService;
  *
  * @property UserSignInService $userSignInSrv
  * @property UserSignUpService $userSignUpSrv
+ * @property UserLogoutService $userLogoutSrv
+ *
  * @property UserIdentity $userIdentity
  */
 class UserController extends Controller
@@ -61,7 +64,8 @@ class UserController extends Controller
      */
     public function logOutAction()
     {
-        $this->userIdentity->logoutUser();
+        $this->userLogoutSrv->doLogout();
+
         return $this->redirect('/index/index');
     }
 }

@@ -18,12 +18,10 @@ class RequestPlugin extends Plugin_Abstract
     {
         /* @var Logger $Logger */
         $Logger = Registry::get('di')->get('logger');
-        $Logger->debug('request showdown info', [
-            'params' => $request->getParams(),
-            'module' => $request->getModuleName(),
-            'controller' => $request->getControllerName(),
-            'action' => $request->getActionName(),
-            'time' => microtime(),
+        $Logger->debug('router showdown', [
+            '$_PARAMS' => $request->getParams(),
+            '$_GET' => $request->getQuery(),
+            '$_POST' => $request->getPost(),
         ]);
     }
 

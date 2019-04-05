@@ -8,7 +8,6 @@ class SignUpListen extends Listener
 {
     public function onSignUp(UserSignUpEvent $event)
     {
-        $user = $event->getUser();
-        $this->logger->debug('user sign up', [$user]);
+        $this->logger->debug('user sign up', [$event->getUser()]);
     }
 }

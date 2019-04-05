@@ -1,6 +1,16 @@
 <?php
 namespace App\Services\User;
 
+use App\Library\Core\Auth\UserIdentity;
+use App\Model\Events\User\UserLoginEvent;
+
+/**
+ * Class UserSignInService
+ * @package App\Services\User
+ *
+ * @property UserIdentity $userIdentity
+ *
+ */
 class UserSignInService extends UserService
 {
     public function validator(array $data)
@@ -29,7 +39,8 @@ class UserSignInService extends UserService
             return false;
         }
 
-        $this->di->get('userIdentity')->loginUser($user);
+        $this->userIdentity->loginUser($user);
+        $this->eventDispatcher->dispatch(UserLoginEvent::getEventName(), new UserLoginEvent($user));
 
         return $user;
     }

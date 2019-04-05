@@ -1,7 +1,6 @@
 <?php
 
 use App\Library\Core\MVC\Controller;
-use App\Model\Domains\Entity\Article;
 use App\Model\Domains\Repositories\Article\ArticleRepository;
 use App\Model\Transformers\Article\ArticleHomeTransformer;
 

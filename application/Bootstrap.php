@@ -51,8 +51,10 @@ class Bootstrap extends Bootstrap_Abstract
     /**
      * 初始化预注入容器服务
      */
-    public function _initServices()
+    public function _initServices(Dispatcher $dispatcher)
     {
+        Registry::set('request', $dispatcher->getRequest());
+
         if (file_exists(APP_PATH . '/conf/di.php') && $services = require(APP_PATH . '/conf/di.php')) {
             Registry::set('di', new Container($services));
         }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Library\Core\MVC\Controller;
+use App\Model\Jobs\Security\checkLoginIPJob;
 
 class IndexController extends Controller
 {

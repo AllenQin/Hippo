@@ -75,7 +75,7 @@ class HQueue
     public function enqueueJobIn($delay, $queue, $job, $arguments)
     {
         $this->delay = 0;
-        return \ResqueScheduler::enqueueIn($delay, $queue, $job, $arguments);
+        \ResqueScheduler::enqueueIn($delay, $queue, $job, $arguments);
     }
 
     /**
@@ -88,7 +88,7 @@ class HQueue
      */
     public function enqueueJobAt($timeAt, $queue, $job, $arguments)
     {
-        return \ResqueScheduler::enqueueAt($timeAt, $queue, $job, $arguments);
+        \ResqueScheduler::enqueueAt($timeAt, $queue, $job, $arguments);
     }
 
     /**
