@@ -32,7 +32,7 @@ class UserController extends Controller
             }
         }
 
-        $this->display('signIn', [
+        return $this->display('signIn', [
             'errorMsg' => $errorMsg,
             'token' => $this->di->get('verifyCsrfToken')->createToken(),
         ]);

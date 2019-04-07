@@ -101,4 +101,9 @@ class BaseController extends Controller_Abstract implements InjectionWareInterfa
 
         return parent::redirect($uri);
     }
+
+    public function getCurrentAction()
+    {
+        return $this->getRequest()->getControllerName();
+    }
 }

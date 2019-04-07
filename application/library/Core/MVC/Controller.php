@@ -22,4 +22,14 @@ class Controller extends BaseController
             // @todo response error page
         }
     }
+
+    public function display($tpl, array $parameters = null)
+    {
+        if (strpos($tpl, '/') === false) {
+            $tpl = strtolower($this->getCurrentAction()) . '/' . $tpl;
+        }
+        $tpl = $tpl . '.phtml';
+
+        return $this->getView()->display($tpl, $parameters);
+    }
 }

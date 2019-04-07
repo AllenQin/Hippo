@@ -1,32 +1,15 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/user_signup.css">
-    <title>User sign in</title>
-</head>
-<body>
+{%extends "common/layout.phtml"%}
+{%block content%}
 <form class="form-signin" method="post" action="/web/user/signIn">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <label for="inputUsername" class="sr-only">Username</label>
     <input type="phone" name="username" id="inputUsername" class="form-control" placeholder="Phone" required autofocus>
     <label for="inputPassword" class="sr-only">Password</label>
     <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-    <?php
-        foreach ($errorMsg as $field => $msg):
-    ?>
-            <div class="alert alert-danger" role="alert"><?=$msg?></div>
-    <?php
-        endforeach;
-    ?>
-    <input type="hidden" name="csrf_token" value="<?=$token?>">
+    {% for msg in errorMsg %}
+    <div class="alert alert-danger" role="alert">{{msg}}</div>
+    {% endfor %}
+    <input type="hidden" name="csrf_token" value="{{token}}">
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 </form>
-
-<script src="/js/jquery.slim.min.js"></script>
-<script src="/js/popper.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-</body>
-</html>
+{%endblock%}
