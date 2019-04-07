@@ -2,7 +2,6 @@
 
 use App\Library\Core\Auth\PolicyService;
 use App\Library\Core\Di\Container;
-use App\Library\Core\MVC\TemplateAdapter;
 use App\Library\Core\Router\Router;
 use Illuminate\Database\Capsule\Manager;
 use Whoops\Handler\PrettyPageHandler;
