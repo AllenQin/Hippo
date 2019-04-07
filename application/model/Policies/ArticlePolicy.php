@@ -10,4 +10,9 @@ class ArticlePolicy
     {
         return $user->id == $article->author_id;
     }
+
+    public function create(User $user, Article $article)
+    {
+        return $user->id ?: false;
+    }
 }

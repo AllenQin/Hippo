@@ -33,6 +33,11 @@ final class Version20190324140400 extends AbstractMigration
             ->setDefault('')
             ->setComment('article title');
 
+        $table->addColumn('content', 'text')
+            ->setNotnull(true)
+            ->setDefault('')
+            ->setComment('article content');
+
         $table->addColumn('author_id', 'integer')
             ->setNotnull(true)
             ->setUnsigned(true)
@@ -61,7 +66,7 @@ final class Version20190324140400 extends AbstractMigration
         $table->addIndex(['author_id'], 'idx_author_id');
 
         $table->addOption('charset', 'utf8');
-        $table->addOption('comment', 'user table');
+        $table->addOption('comment', 'user article table');
     }
 
     public function down(Schema $schema) : void
