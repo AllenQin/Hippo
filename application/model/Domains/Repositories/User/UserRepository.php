@@ -14,8 +14,7 @@ class UserRepository extends AbstractRepository
 {
     public function __construct()
     {
-        $this->model = new UserEntity();
-        $this->modelName = UserEntity::class;
+        parent::__construct(new UserEntity());
     }
 
     /**

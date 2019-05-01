@@ -1,6 +1,5 @@
 <?php
 
-use App\Library\Core\Auth\PolicyService;
 use App\Library\Core\Di\Container;
 use App\Library\Core\Router\Router;
 use Illuminate\Database\Capsule\Manager;
@@ -50,6 +49,8 @@ class Bootstrap extends Bootstrap_Abstract
 
     /**
      * 初始化预注入容器服务
+     *
+     * @param Dispatcher $dispatcher
      */
     public function _initServices(Dispatcher $dispatcher)
     {
@@ -58,18 +59,6 @@ class Bootstrap extends Bootstrap_Abstract
         if (file_exists(APP_PATH . '/conf/di.php') && $services = require(APP_PATH . '/conf/di.php')) {
             Registry::set('di', new Container($services));
         }
-    }
-
-    public function _initPolicy()
-    {
-        $policyFilePath = APP_PATH . '/conf/policy.php';
-        if (!file_exists($policyFilePath) || !$policies = require($policyFilePath)) {
-            $policies = [];
-        }
-
-        Registry::get('di')->set('policy', function($c) use ($policies) {
-            return new PolicyService($policies);
-        });
     }
 
     /**

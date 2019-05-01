@@ -1,17 +1,16 @@
 <html>
 <head>
-    <title>Post Info</title>
+    <title>Create Article</title>
 </head>
 <body>
 <style>
     .content{width:100%;min-height: 400px;text-align: center;line-height: 400px;font-size:62px;font-family: 'Menlo', 'Monaco', monospace}
 </style>
-{% for item in articles %}
-<p>
-    <a href="/article/show/{{item.id}}"> {{item.title}} </a>
-    <i>-{{item.author}}</i>
-    <i>-{{item.created_at}}</i>
-</p>
-{% endfor %}
+<div class="content">
+    {{form_start(form)}}
+    {{form_widget(form)}}
+    <input type="submit">
+    {{form_end(form)}}
+</div>
 </body>
 </html>

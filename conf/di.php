@@ -67,9 +67,6 @@ return [
         // customer send Email class
         return new Mail(new PHPMailerClient($c['config']['mail']));
     },
-    'auth' => function($c) {
-        return new App\Library\Core\Auth\Auth($c);
-    },
     'userSignInSrv' => function($c) {
         return new UserSignInService($c['userRepository']);
     },

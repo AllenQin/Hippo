@@ -2,6 +2,7 @@
 
 use App\Library\Core\MVC\Controller;
 use App\Model\Domains\Repositories\Article\ArticleRepository;
+use App\Model\Forms\ArticleForm;
 use App\Model\Transformers\Article\ArticleHomeTransformer;
 
 /**
@@ -49,6 +50,26 @@ class ArticleController extends Controller
 
         return $this->display('show', [
             'article' => $this->articleTransformer->transformOne($article),
+        ]);
+    }
+
+    /**
+     * Save article
+     */
+    public function storageAction()
+    {
+
+    }
+
+    /**
+     * Display an Article form
+     */
+    public function createAction()
+    {
+        $form = new ArticleForm();
+
+        return $this->display('create', [
+            'form' => $form->getCreateForm(),
         ]);
     }
 }

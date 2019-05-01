@@ -6,6 +6,7 @@ use App\Library\Core\Auth\UserIdentity;
 use App\Library\Core\Validators\Assert;
 use Monolog\Logger;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Yaf\Request_Abstract;
 
 /**
  * Class InjectionWareTrait
@@ -16,6 +17,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  * @property Logger $logger
  * @property UserIdentity $userIdentity
  * @property Auth $auth
+ * @property Request_Abstract $request
  *
  * @package App\Library\Core\Di
  */

@@ -19,6 +19,12 @@ abstract class AbstractRepository
      */
     protected $modelName;
 
+    public function __construct($model)
+    {
+        $this->model = $model;
+        $this->modelName = get_class($model);
+    }
+
     /**
      * Find a single entity object by pk
      *

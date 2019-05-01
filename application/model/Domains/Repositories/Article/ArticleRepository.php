@@ -9,8 +9,7 @@ class ArticleRepository extends AbstractRepository
 {
     public function __construct()
     {
-        $this->model = new ArticleEntity();
-        $this->modelName  = ArticleEntity::class;
+        parent::__construct(new ArticleEntity());
     }
 
     /**
