@@ -7,6 +7,11 @@ use Yaf\Request_Abstract;
 
 class VerifryCsrfToken extends ServiceWrapper implements MiddleWareInterface
 {
+    /**
+     * @param Request_Abstract $request
+     * @return Request_Abstract
+     * @throws \Exception
+     */
     public function handle(Request_Abstract $request)
     {
         if ($request->isPost()) {

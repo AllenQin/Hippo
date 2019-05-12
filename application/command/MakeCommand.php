@@ -22,6 +22,16 @@ class MakeCommand extends BaseMakeFile
         $command = $input->getOption('command');
         $makeFileFlag = $input->getOption('make-file') ?: false;
 
+        if (!$fileName) {
+            $output->writeln('file is not null');
+            return false;
+        }
+
+        if (!$command) {
+            $output->writeln('command is not null');
+            return false;
+        }
+
         $nameSpace = 'Command';
         $className = ucfirst($fileName) . 'Command';
         $fileName = $className . '.php';

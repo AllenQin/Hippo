@@ -7,7 +7,5 @@ class indexTest extends TestCase
     {
         $stack = [];
         $this->assertEmpty($stack);
-
-        return $stack;
     }
 }

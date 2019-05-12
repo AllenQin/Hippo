@@ -13,7 +13,6 @@ use App\Library\Core\Session\RedisStorage;
 use App\Library\Core\Session\SessionBag;
 use App\Library\Core\Validators\Assert;
 use App\Library\Core\Verify\VerifyCsrfToken;
-use App\Model\Domains\Entity\User;
 use App\Services\User\UserLogoutService;
 use App\Services\User\UserSignInService;
 use App\Services\User\UserSignUpService;
