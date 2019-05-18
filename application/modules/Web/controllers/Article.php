@@ -18,10 +18,23 @@ class ArticleController extends Controller
      */
     public function indexAction(ArticleRepository $articleRepository, ArticleHomeTransformer $articleHomeTransformer)
     {
-        $articleCollection = $articleRepository->findLastPublishArticle(10);
+        $limit = 10;
+        $page = (int)$this->getQuery('page', 1);
+        $offset = ($page - 1) * $limit;
+
+        $result = $articleRepository->findPublishArticleByPaginate($offset, $limit);
+        $articleCollection = $result['list'];
+
+        $page = [
+            'previous' => $page > 1 ? true : false,
+            'next' => $result['count'] > $offset + $limit ? true : false,
+            'previous_page' => $page ? $page - 1 : 1,
+            'next_page' => $page + 1,
+        ];
 
         return $this->display('index', [
             'articles' => $articleHomeTransformer->transform($articleCollection),
+            'page' => $page,
         ]);
     }
 

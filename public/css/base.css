@@ -21,14 +21,14 @@ body {
 }
 
 .nav ul {
-    margin: 0;
+    margin: 0 0 0 30px;
     padding: 0;
     list-style: none;
 }
 
 .nav ul li{
     float:left;
-    padding:0 16px;
+    padding:0 10px;
     width:60px;
     height: 30px;
     text-align: center;
@@ -46,7 +46,7 @@ body {
 .nav ul li a:hover{
     background: #393939;
     border: 1px solid #393939;
-    border-radius: 6px;
+    border-radius: 4px;
     color:#fff;
 }
 
@@ -62,7 +62,7 @@ body {
 }
 
 .article-title:hover{
-    color: #A1A1A1;
+    color: #336699;
     text-decoration: honeydew;
 }
 
@@ -72,11 +72,11 @@ body {
 }
 
 .article-detail:hover{
-    color:#A1A1A1;
+    color:#336699;
 }
 
 .article-item{
-    width: 80%;
+    width: 90%;
     margin:0 auto;
     border-bottom: 1px dashed #f1f1f1;
 }
@@ -95,9 +95,43 @@ body {
 }
 
 .footer{
-    width: 100%;
     height:42px;
     border-top: 1px solid #f1f1f1;
-    text-align: center;
     line-height: 42px;
+    padding-left:60px;
+}
+
+.warp-content .detail-title{
+    text-align: center;
+}
+
+.warp-content .detail-title h2{
+    font-size:20px;
+    font-weight: normal;
+}
+
+.warp-content .article-detail-content {
+    padding:0 60px;
+    letter-spacing: 2px;
+    line-height: 26px;
+    margin-bottom:20px;
+}
+
+.warp-content .article-detail-content p{
+    text-indent: 40px;
+}
+
+.pagination{
+    text-align: center;
+    margin-top:20px;
+    margin-bottom: 20px;
+}
+
+.pagination a{
+    color: #393939;
+    text-decoration: none;
+}
+
+.pagination a:hover{
+    color: #336699;
 }

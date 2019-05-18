@@ -57,7 +57,7 @@ abstract class AbstractRepository
      *
      * @param $attribute
      * @param $value
-     * @return mixed
+     * @return integer
      */
     public function findCountBy($attribute, $value)
     {

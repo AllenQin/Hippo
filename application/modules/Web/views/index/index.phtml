@@ -4,9 +4,9 @@
 <main role="main" class="container">
         {% for item in articles %}
         <div class="article-item">
-                <a class="article-title" href="/post/{{item.id}}"> <h2>{{item.title}}</h2> </a>
+                <a class="article-title" href="/post/{{item.id}}"> <h2>{{item.title|striptags}}</h2> </a>
                 <p class="article-summary">
-                    {{item.summary}}
+                    {{item.summary|striptags}}
                 </p>
                 <p class="article-ext">
                     <a href="/post/{{item.id}}" class="article-detail">详细内容&gt;&gt; </a> &nbsp; {{item.created_at}}

@@ -19,12 +19,12 @@ class ArticleRepository extends AbstractRepository
      * @param $limit
      * @return array
      */
-    public function findPendingArticleByPaginate($offset, $limit)
+    public function findPublishArticleByPaginate($offset, $limit)
     {
-        $query = $this->model->where('status', Article::STATUS_PENDING);
+        $query = $this->model->where('status', Article::STATUS_PUBLISH);
         return [
             'count' => $query->count(),
-            'list' => $query->offset($offset)->take($limit)->get(),
+            'list' => $query->offset($offset)->orderBy('id', 'desc')->take($limit)->get(),
         ];
     }
 
@@ -39,5 +39,15 @@ class ArticleRepository extends AbstractRepository
         return $this->model->where('status', Article::STATUS_PUBLISH)
             ->orderBy('id', 'desc')
             ->take($limit)->get();
+    }
+
+    /**
+     * Get the count for published article
+     *
+     * @return integer
+     */
+    public function findPublishArticleCount()
+    {
+        return $this->findCountBy('status', Article::STATUS_PUBLISH);
     }
 }

@@ -1,7 +1,26 @@
-{% for item in articles %}
-<p>
-    <a href="/post/{{item.id}}"> {{item.title}} </a>
-    <i>-{{item.author}}</i>
-    <i>-{{item.created_at}}</i>
-</p>
-{% endfor %}
+{%extends "common/articleLayout.phtml"%}
+
+{%block content%}
+<main role="main" class="container">
+    {% for item in articles %}
+    <div class="article-item">
+        <a class="article-title" href="/post/{{item.id}}"> <h2>{{item.title|striptags}}</h2> </a>
+        <p class="article-summary">
+            {{item.summary|striptags}}
+        </p>
+        <p class="article-ext">
+            <a href="/post/{{item.id}}" class="article-detail">详细内容&gt;&gt; </a> &nbsp; {{item.created_at}}
+        </p>
+    </div>
+    {% endfor %}
+    <div class="pagination">
+        {% if page.previous %}
+            <a class="previous_page" href="/post-list?page={{page.previous_page}}">上一页</a>
+        {% endif %}
+        {% if page.next %}
+            <a class="next_page" href="/post-list?page={{page.next_page}}">下一页</a>
+        {% endif %}
+    </div>
+</main>
+{%endblock%}
+

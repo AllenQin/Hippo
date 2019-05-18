@@ -1,11 +1,16 @@
-<html>
-<head>
-    <title>{{article.title}}</title>
-</head>
-<body>
-<style>
-    .content{width:100%;min-height: 400px;text-align: center;line-height: 400px;font-size:62px;font-family: 'Menlo', 'Monaco', monospace}
-</style>
-   {{article.content}}
-</body>
-</html>
+{%extends "common/articleLayout.phtml"%}
+
+{% block title%}
+{{article.title}}
+{%endblock%}
+
+{%block content%}
+    <div class="detail-title">
+        <h2>{{article.title}}</h2>
+    </div>
+    <div class="article-detail-content">
+        {{article.content|raw}}
+    </div>
+{%endblock%}
+
+
