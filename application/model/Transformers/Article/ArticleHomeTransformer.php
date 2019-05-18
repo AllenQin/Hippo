@@ -17,6 +17,8 @@ class ArticleHomeTransformer implements TransformContract
             return [
                 'id' => $article->id,
                 'title' => $article->title,
+                'summary' => mb_substr($article->content, 0, 300),
+                'content' => $article->content,
                 'author' => $article->user->nickname,
                 'created_at' => $article->created_at,
             ];

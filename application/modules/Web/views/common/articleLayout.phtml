@@ -1,0 +1,26 @@
+<html>
+<head>
+    <title>{% block title %}AllenQin 博客{% endblock %}</title>
+    <meta name="Keywords" content="{%block keywords%}博客，AllenQin，江湖六少{% endblock %}">
+    <meta name="Description" content="{%block description%}AllenQin的博客，技术、生活记录{% endblock %}">
+</head>
+<link rel="stylesheet" href="/css/base.css">
+<body>
+<div class="container">
+    <div class="nav">
+        <ul>
+            <li><a href="/">首页</a></li>
+            <li><a href="/post-list">列表</a></li>
+            <li><a href="/introduction">简介</a></li>
+        </ul>
+    </div>
+    <div class="warp-content">
+        {% block content %}{% endblock %}
+    </div>
+    <div class="footer">
+        Copy right &copy; AllenQin
+    </div>
+</div>
+</body>
+</html>
+

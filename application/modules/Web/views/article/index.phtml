@@ -1,11 +1,3 @@
-<html>
-<head>
-    <title>Post Info</title>
-</head>
-<body>
-<style>
-    .content{width:100%;min-height: 400px;text-align: center;line-height: 400px;font-size:62px;font-family: 'Menlo', 'Monaco', monospace}
-</style>
 {% for item in articles %}
 <p>
     <a href="/post/{{item.id}}"> {{item.title}} </a>
@@ -13,5 +5,3 @@
     <i>-{{item.created_at}}</i>
 </p>
 {% endfor %}
-</body>
-</html>

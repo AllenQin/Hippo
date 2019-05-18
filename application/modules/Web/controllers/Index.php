@@ -1,25 +1,26 @@
 <?php
 
 use App\Library\Core\MVC\Controller;
+use App\Model\Domains\Repositories\Article\ArticleRepository;
+use App\Model\Transformers\Article\ArticleHomeTransformer;
 
 /**
  * Class IndexController
  */
 class IndexController extends Controller
 {
-    public function indexAction()
-    {
-        $message = $this->userIdentity->isGuest ? 'Hello, Hippo'
-            : 'Hello, ' . $this->userIdentity->userData['username'];
-
-        return $this->display('index', ['content' => $message]);
-    }
-
     /**
-     * Post detail page
+     * Blog home page
+     *
+     * @param ArticleRepository $articleRepository
+     * @param ArticleHomeTransformer $articleHomeTransformer
+     * @return bool
      */
-    public function showAction()
+    public function indexAction(ArticleRepository $articleRepository, ArticleHomeTransformer $articleHomeTransformer)
     {
-        return $this->display('show', ['editForm' => '']);
+        $articles = $articleRepository->findLastPublishArticle(5);
+        $articles = $articleHomeTransformer->transform($articles);
+
+        return $this->display('index', compact('articles'));
     }
 }
