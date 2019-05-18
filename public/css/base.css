@@ -135,3 +135,8 @@ body {
 .pagination a:hover{
     color: #336699;
 }
+
+.introduction{
+    margin-top:20px;
+    padding-left:40px;
+}
