@@ -7,6 +7,8 @@ class Controller extends BaseController
 {
     public function init()
     {
+        parent::init();
+
         if (!$this->config['application']['debug']) {
             set_exception_handler([$this, 'catchException']);
         }
@@ -26,7 +28,7 @@ class Controller extends BaseController
     public function display($tpl, array $parameters = null)
     {
         if (strpos($tpl, '/') === false) {
-            $tpl = strtolower($this->getCurrentAction()) . '/' . $tpl;
+            $tpl = strtolower($this->getCurrentController()) . '/' . $tpl;
         }
         $tpl = $tpl . '.phtml';
 

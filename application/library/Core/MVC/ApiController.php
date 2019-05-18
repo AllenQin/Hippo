@@ -12,6 +12,7 @@ class ApiController extends BaseController
     public function init()
     {
         set_exception_handler([$this, 'catchException']);
+        parent::init();
     }
 
     public function catchException(\Exception $e)

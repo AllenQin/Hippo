@@ -54,6 +54,7 @@ class UserIdentity
      * UserIdentity constructor.
      *
      * @param Container $container
+     * @throws \Exception
      */
     public function __construct(Container $container)
     {

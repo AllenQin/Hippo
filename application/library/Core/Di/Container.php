@@ -12,7 +12,8 @@ class Container implements ContainerInterface, \ArrayAccess
 
     /**
      * Container constructor.
-     * @param $services
+     * @param array $services
+     * @throws Exception
      */
     public function __construct($services = [])
     {
@@ -28,7 +29,7 @@ class Container implements ContainerInterface, \ArrayAccess
     /**
      * @param $name
      * @param $service
-     * @return mixed
+     * @throws Exception
      */
     function set($name, $service)
     {
@@ -38,6 +39,7 @@ class Container implements ContainerInterface, \ArrayAccess
     /**
      * @param $name
      * @return mixed
+     * @throws Exception
      */
     function get($name)
     {
@@ -60,6 +62,7 @@ class Container implements ContainerInterface, \ArrayAccess
     /**
      * @param mixed $offset
      * @return mixed
+     * @throws Exception
      */
     public function offsetGet($offset)
     {
@@ -69,6 +72,7 @@ class Container implements ContainerInterface, \ArrayAccess
     /**
      * @param mixed $offset
      * @param mixed $value
+     * @throws Exception
      */
     public function offsetSet($offset, $value)
     {
@@ -131,6 +135,7 @@ class Container implements ContainerInterface, \ArrayAccess
 
     /**
      * @return Container
+     * @throws Exception
      */
     public static function getDefault()
     {
@@ -147,6 +152,7 @@ class Container implements ContainerInterface, \ArrayAccess
      * @param $name
      * @param $callback
      * @return mixed
+     * @throws Exception
      */
     public function getOrInstance($name, $callback)
     {
@@ -157,6 +163,3 @@ class Container implements ContainerInterface, \ArrayAccess
         return $this->get($name);
     }
 }
-
-
-

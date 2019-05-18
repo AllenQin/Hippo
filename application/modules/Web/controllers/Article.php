@@ -13,43 +13,36 @@ use App\Model\Transformers\Article\ArticleHomeTransformer;
  */
 class ArticleController extends Controller
 {
-    private $articleRepository;
-    private $articleTransformer;
-
-    public function init()
-    {
-        $this->articleRepository = new ArticleRepository();
-        $this->articleTransformer = new ArticleHomeTransformer();
-
-        parent::init();
-    }
-
     /**
      * Article home page
      *
+     * @param ArticleRepository $articleRepository
+     * @param ArticleHomeTransformer $articleHomeTransformer
      * @return bool
      */
-    public function indexAction()
+    public function indexAction(ArticleRepository $articleRepository, ArticleHomeTransformer $articleHomeTransformer)
     {
-        $articleCollection = $this->articleRepository->findLastPublishArticle(10);
+        $articleCollection = $articleRepository->findLastPublishArticle(10);
 
         return $this->display('index', [
-            'articles' => $this->articleTransformer->transform($articleCollection),
+            'articles' => $articleHomeTransformer->transform($articleCollection),
         ]);
     }
 
     /**
      * Article info page
      *
-     * @param integer $id
+     * @param int $id
+     * @param ArticleRepository $articleRepository
+     * @param ArticleHomeTransformer $articleHomeTransformer
      * @return bool
      */
-    public function showAction($id = 0)
+    public function showAction($id = 0, ArticleRepository $articleRepository, ArticleHomeTransformer $articleHomeTransformer)
     {
-        $article = $this->articleRepository->find($id);
+        $article = $articleRepository->find($id);
 
         return $this->display('show', [
-            'article' => $this->articleTransformer->transformOne($article),
+            'article' => $articleHomeTransformer->transformOne($article),
         ]);
     }
 

@@ -14,31 +14,23 @@
  *  ],
  */
 
-use App\Model\Events\User\UserLoginEvent;
-use App\Model\Events\User\UserLogoutEvent;
-use App\Model\Events\User\UserSignUpEvent;
-use App\Model\Listeners\Security\CheckLoginSecurityListen;
-use App\Model\Listeners\User\LoginListen;
-use App\Model\Listeners\User\LogoutListen;
-use App\Model\Listeners\User\SignUpListen;
-
 return [
     'userSingUp' => [
-        function(UserSignUpEvent $event) {
-            return (new SignUpListen())->onSignUp($event);
+        function(App\Model\Events\User\UserSignUpEvent $event) {
+            return (new App\Model\Listeners\User\SignUpListen())->onSignUp($event);
         },
     ],
     'userLogout' => [
-        function(UserLogoutEvent $event) {
-            return (new LogoutListen())->handle($event);
+        function(App\Model\Events\User\UserLogoutEvent $event) {
+            return (new App\Model\Listeners\User\LogoutListen())->handle($event);
         },
     ],
     'userLogin' => [
-        function(UserLoginEvent $event) {
-            return (new LoginListen())->handle($event);
+        function(App\Model\Events\User\UserLoginEvent $event) {
+            return (new App\Model\Listeners\User\LoginListen())->handle($event);
         },
-        function(UserLoginEvent $event) {
-            return (new CheckLoginSecurityListen())->handle($event);
+        function(App\Model\Events\User\UserLoginEvent $event) {
+            return (new App\Model\Listeners\Security\CheckLoginSecurityListen())->handle($event);
         }
     ],
 ];

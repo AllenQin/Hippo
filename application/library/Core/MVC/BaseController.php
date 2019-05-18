@@ -9,12 +9,20 @@ use Yaf\Controller_Abstract;
  * Class BaseController
  *
  *
+ * @property array $config
+ *
  * @package App\Library\Core\MVC
  */
 class BaseController extends Controller_Abstract implements InjectionWareInterface
 {
     use InjectionWareTrait;
     public $yafAutoRender = false;
+
+    public function init()
+    {
+        // init method depend injection class
+        $this->autoInjectionDependClass();
+    }
 
     public function getQuery($name = '', $default = '')
     {
@@ -102,8 +110,32 @@ class BaseController extends Controller_Abstract implements InjectionWareInterfa
         return parent::redirect($uri);
     }
 
-    public function getCurrentAction()
+    public function getCurrentController()
     {
         return $this->getRequest()->getControllerName();
+    }
+
+    public function getCurrentAction()
+    {
+        return $this->getRequest()->getActionName();
+    }
+
+    private function autoInjectionDependClass()
+    {
+        $method = $this->getCurrentAction() . 'Action';
+        $reflection = new \ReflectionMethod($this, $method);
+        $params = $reflection->getParameters();
+
+        $invokeArray = [];
+        foreach ($params as $object) {
+            if (!$object->getClass()) {
+                $invokeArray[] = $this->getParam($object->getName(), $object->getDefaultValue());
+            } else {
+                $invokeArray[] = $object->getClass()->newInstanceArgs();
+            }
+        }
+
+        $reflection->invokeArgs($this, $invokeArray);
+        exit();
     }
 }
